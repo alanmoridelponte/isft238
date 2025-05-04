@@ -32,7 +32,7 @@ class CategoryResource extends Resource {
                             ->label('Nombre')
                             ->required()
                             ->maxLength(255)
-                            ->unique(Category::class, 'name')
+                            ->unique(Category::class, 'name', ignoreRecord: true)
                             ->reactive()
                             ->debounce(600)
                             ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
@@ -41,7 +41,7 @@ class CategoryResource extends Resource {
                         Forms\Components\TextInput::make('slug')
                             ->label('Alias')
                             ->required()
-                            ->unique(Category::class, 'slug')
+                            ->unique(Category::class, 'slug', ignoreRecord: true)
                             ->helperText('Fragmento de URL amigable')
                             ->dehydrated(fn($state) => ! empty($state))
                             ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 11]),
@@ -54,17 +54,23 @@ class CategoryResource extends Resource {
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('slug')
+                    ->label('Nombre')
+                    ->description(fn(Category $record): string => "blog/{$record->slug}")
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('posts_count')
-                    ->label('Posts')
+                    ->label('Entradas relacionadas')
+                    ->description("Número de entradas relacionadas a esta categoría", position: 'above')
                     ->color('primary')
+                    ->icon('heroicon-s-document-text')
                     ->badge()
+                    ->formatStateUsing(fn($state, $record) => "Entradas relacionadas: {$state}")
+                    ->url(fn($record) => PostResource::getUrl('index', [
+                        'tableFilters' => [
+                            'category_id' => ['values' => [$record->id]],
+                        ],
+                    ]))
                     ->counts('posts'),
             ])
             ->filters([

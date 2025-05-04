@@ -32,7 +32,7 @@ class TagResource extends Resource {
                             ->label('Nombre')
                             ->required()
                             ->maxLength(255)
-                            ->unique(Tag::class, 'name')
+                            ->unique(Tag::class, 'name', ignoreRecord: true)
                             ->reactive()
                             ->debounce(600)
                             ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
@@ -41,7 +41,7 @@ class TagResource extends Resource {
                         Forms\Components\TextInput::make('slug')
                             ->label('Alias')
                             ->required()
-                            ->unique(Tag::class, 'slug')
+                            ->unique(Tag::class, 'slug', ignoreRecord: true)
                             ->helperText('Fragmento de URL amigable')
                             ->dehydrated(fn($state) => ! empty($state))
                             ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 11]),
@@ -54,17 +54,23 @@ class TagResource extends Resource {
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('slug')
+                    ->label('Nombre')
+                    ->description(fn(Tag $record): string => "blog/etiquetas/{$record->slug}")
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('posts_count')
-                    ->label('Posts')
+                    ->label('Entradas relacionadas')
+                    ->description("Número de entradas relacionadas a esta etiqueta", position: 'above')
                     ->color('primary')
+                    ->icon('heroicon-s-document-text')
                     ->badge()
+                    ->formatStateUsing(fn($state, $record) => "Entradas relacionadas: {$state}")
+                    ->url(fn($record) => PostResource::getUrl('index', [
+                        'tableFilters' => [
+                            'tags' => ['values' => [$record->id]],
+                        ],
+                    ]))
                     ->counts('posts'),
             ])
             ->filters([
