@@ -17,11 +17,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 class UserResource extends Resource {
-    protected static ?string $model            = User::class;
-    protected static ?string $modelLabel       = 'Usuario';
-    protected static ?string $pluralModelLabel = 'Usuarios';
-    protected static ?string $navigationIcon   = 'heroicon-o-users';
-    protected static ?string $navigationGroup  = 'Administración';
+    protected static ?string $model                = User::class;
+    protected static ?string $modelLabel           = 'Usuario';
+    protected static ?string $pluralModelLabel     = 'Usuarios';
+    protected static ?string $navigationIcon       = 'heroicon-o-users';
+    protected static ?string $activeNavigationIcon = 'heroicon-s-users';
+    protected static ?string $navigationGroup      = 'Administración';
 
     public static function form(Form $form): Form {
         return $form
