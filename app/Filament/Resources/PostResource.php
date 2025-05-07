@@ -94,30 +94,34 @@ class PostResource extends Resource {
                                     ->searchable(['name', 'slug'])
                                     ->preload()
                                     ->required()
-                                    ->createOptionModalHeading('Crear nueva categoría')
-                                    ->createOptionForm([
-                                        Forms\Components\Grid::make()
-                                            ->schema([
-                                                Forms\Components\TextInput::make('name')
-                                                    ->label('Nombre')
-                                                    ->required()
-                                                    ->maxLength(255)
-                                                    ->unique(Category::class, 'name')
-                                                    ->reactive()
-                                                    ->debounce(600)
-                                                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
-                                                    ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 13]),
+                                    ->when(
+                                        auth()->user()->can('create_category'),
+                                        fn($select) => $select
+                                            ->createOptionModalHeading('Crear nueva categoría')
+                                            ->createOptionForm([
+                                                Forms\Components\Grid::make()
+                                                    ->schema([
+                                                        Forms\Components\TextInput::make('name')
+                                                            ->label('Nombre')
+                                                            ->required()
+                                                            ->maxLength(255)
+                                                            ->unique(Category::class, 'name')
+                                                            ->reactive()
+                                                            ->debounce(600)
+                                                            ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
+                                                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 13]),
 
-                                                Forms\Components\TextInput::make('slug')
-                                                    ->label('Alias')
-                                                    ->required()
-                                                    ->unique(Category::class, 'slug')
-                                                    ->helperText('Fragmento de URL amigable')
-                                                    ->dehydrated(fn($state) => ! empty($state))
-                                                    ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 11]),
+                                                        Forms\Components\TextInput::make('slug')
+                                                            ->label('Alias')
+                                                            ->required()
+                                                            ->unique(Category::class, 'slug')
+                                                            ->helperText('Fragmento de URL amigable')
+                                                            ->dehydrated(fn($state) => ! empty($state))
+                                                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 11]),
+                                                    ])
+                                                    ->columns(['default' => 6, 'md' => 12, 'lg' => 24]),
                                             ])
-                                            ->columns(['default' => 6, 'md' => 12, 'lg' => 24]),
-                                    ]),
+                                    ),
 
                                 Forms\Components\Select::make('tags')
                                     ->label('Etiquetas de la entrada')
@@ -125,30 +129,34 @@ class PostResource extends Resource {
                                     ->searchable(['name', 'slug'])
                                     ->preload()
                                     ->multiple()
-                                    ->createOptionModalHeading('Crear nueva etiqueta')
-                                    ->createOptionForm([
-                                        Forms\Components\Grid::make()
-                                            ->schema([
-                                                Forms\Components\TextInput::make('name')
-                                                    ->label('Nombre')
-                                                    ->required()
-                                                    ->maxLength(255)
-                                                    ->unique(Tag::class, 'name')
-                                                    ->reactive()
-                                                    ->debounce(600)
-                                                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
-                                                    ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 13]),
+                                    ->when(
+                                        auth()->user()->can('create_tag'),
+                                        fn($select) => $select
+                                            ->createOptionModalHeading('Crear nueva etiqueta')
+                                            ->createOptionForm([
+                                                Forms\Components\Grid::make()
+                                                    ->schema([
+                                                        Forms\Components\TextInput::make('name')
+                                                            ->label('Nombre')
+                                                            ->required()
+                                                            ->maxLength(255)
+                                                            ->unique(Tag::class, 'name')
+                                                            ->reactive()
+                                                            ->debounce(600)
+                                                            ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
+                                                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 13]),
 
-                                                Forms\Components\TextInput::make('slug')
-                                                    ->label('Alias')
-                                                    ->required()
-                                                    ->unique(Tag::class, 'slug')
-                                                    ->helperText('Fragmento de URL amigable')
-                                                    ->dehydrated(fn($state) => ! empty($state))
-                                                    ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 11]),
+                                                        Forms\Components\TextInput::make('slug')
+                                                            ->label('Alias')
+                                                            ->required()
+                                                            ->unique(Tag::class, 'slug')
+                                                            ->helperText('Fragmento de URL amigable')
+                                                            ->dehydrated(fn($state) => ! empty($state))
+                                                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 11]),
+                                                    ])
+                                                    ->columns(['default' => 6, 'md' => 12, 'lg' => 24]),
                                             ])
-                                            ->columns(['default' => 6, 'md' => 12, 'lg' => 24]),
-                                    ]),
+                                    ),
 
                                 Forms\Components\ToggleButtons::make('status')
                                     ->label('Estado')

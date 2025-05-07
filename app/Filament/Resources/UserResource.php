@@ -45,8 +45,18 @@ class UserResource extends Resource {
                         ->visible(fn(Page $livewire): bool => $livewire instanceof CreateRecord || $livewire instanceof EditRecord)
                         ->dehydrateStateUsing(fn($state) => Hash::make($state))
                         ->dehydrated(fn($state) => filled($state)),
-                ]),
-            ]);
+
+                ])
+                    ->columnSpan(['default' => 1, 'md' => 14, 'lg' => 14, 'xl' => 14]),
+
+                Forms\Components\Section::make('Permisos')->schema([
+                    Forms\Components\CheckboxList::make('roles')
+                        ->relationship('roles', 'name')
+                        ->searchable(),
+                ])
+                    ->columnSpan(['default' => 1, 'md' => 10, 'lg' => 10, 'xl' => 10]),
+            ])
+            ->columns(['default' => 1, 'md' => 24, 'lg' => 24, 'xl' => 24]);
     }
 
     public static function table(Table $table): Table {
@@ -56,6 +66,12 @@ class UserResource extends Resource {
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('roles.name')
+                    ->label('Roles')
+                    ->searchable()
+                    ->sortable()
+                    ->badge()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
