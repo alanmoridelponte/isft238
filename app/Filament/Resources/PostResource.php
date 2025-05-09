@@ -6,8 +6,10 @@ use App\Filament\Resources\PostResource\Pages;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Camya\Filament\Forms\Components\TitleWithSlugInput;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Pages\Page;
 use Filament\Resources\Pages\EditRecord;
@@ -16,6 +18,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Unique;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class PostResource extends Resource {
@@ -56,27 +59,32 @@ class PostResource extends Resource {
                     ->schema([
                         Forms\Components\Section::make('Contenido principal')
                             ->schema([
-                                Forms\Components\Grid::make()
-                                    ->schema([
-                                        Forms\Components\TextInput::make('title')
-                                            ->label('Título')
-                                            ->required()
-                                            ->maxLength(255)
-                                            ->unique(Post::class, 'name', ignoreRecord: true)
-                                            ->reactive()
-                                            ->debounce(600)
-                                            ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
-                                            ->columnSpan(['default' => 1, 'lg' => 13]),
-
-                                        Forms\Components\TextInput::make('slug')
-                                            ->label('Alias')
-                                            ->required()
-                                            ->unique(Post::class, 'slug', ignoreRecord: true)
-                                            ->helperText('Fragmento de URL amigable')
-                                            ->dehydrated(fn($state) => ! empty($state))
-                                            ->columnSpan(['default' => 1, 'lg' => 11]),
-                                    ])
-                                    ->columns(['default' => 1, 'lg' => 24]),
+                                TitleWithSlugInput::make(
+                                    fieldTitle: 'title',
+                                    fieldSlug: 'slug',
+                                    urlPath: fn(Get $get) => Str::wrap(Category::find($get('category_id'))?->slug, before: '/blog/', after: '/'),
+                                    urlVisitLinkVisible: false,
+                                    titleLabel: 'Nombre de la entrada',
+                                    titlePlaceholder: 'Inserta el nombre de la entrada...',
+                                    slugLabel: 'URL:',
+                                    titleRules: [
+                                        'required',
+                                        'string',
+                                        'min:3',
+                                        'max:255',
+                                    ],
+                                    titleRuleUniqueParameters: [
+                                        'ignorable'       => fn(?Post $record)       => $record,
+                                        'modifyRuleUsing' => fn(Unique $rule) => $rule->whereNull('deleted_at'),
+                                        'column'          => 'name',
+                                        'ignoreRecord'    => true,
+                                    ],
+                                    slugRuleUniqueParameters: [
+                                        'ignorable'    => fn(?Post $record)    => $record,
+                                        'column'       => 'slug',
+                                        'ignoreRecord' => true,
+                                    ],
+                                ),
 
                                 Forms\Components\TextInput::make('excerpt')
                                     ->label('Extracto')
@@ -88,12 +96,24 @@ class PostResource extends Resource {
 
                         Forms\Components\Section::make('Configuración en el blog')
                             ->schema([
+                                Forms\Components\ToggleButtons::make('status')
+                                    ->label('Estado')
+                                    ->options(PostStatus::class)
+                                    ->default(PostStatus::DRAFT->value)
+                                    ->required()
+                                    ->live()
+                                    ->columns(3)->extraAttributes(['style' => 'display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wrap;'])
+                                    ->helperText(fn($state) =>
+                                        $state ? PostStatus::tryFrom($state)?->getDescription() : ''
+                                    ),
+
                                 Forms\Components\Select::make('category_id')
                                     ->label('Categoría de la entrada')
                                     ->relationship(name: 'category', titleAttribute: 'name')
                                     ->searchable(['name', 'slug'])
                                     ->preload()
                                     ->required()
+                                    ->live()
                                     ->when(
                                         auth()->user()->can('create_category'),
                                         fn($select) => $select
@@ -157,17 +177,6 @@ class PostResource extends Resource {
                                                     ->columns(['default' => 6, 'md' => 12, 'lg' => 24]),
                                             ])
                                     ),
-
-                                Forms\Components\ToggleButtons::make('status')
-                                    ->label('Estado')
-                                    ->options(PostStatus::class)
-                                    ->default(PostStatus::DRAFT->value)
-                                    ->required()
-                                    ->live()
-                                    ->columns(3)->extraAttributes(['style' => 'display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wrap;'])
-                                    ->helperText(fn($state) =>
-                                        $state ? PostStatus::tryFrom($state)?->getDescription() : ''
-                                    ),
                             ])
                             ->columnSpan(['default' => 1, 'md' => 11, 'lg' => 24, 'xl' => 10]),
                     ])->columns(['default' => 1, 'md' => 24, 'xl' => 24]),
@@ -197,8 +206,8 @@ class PostResource extends Resource {
                             ->columnSpanFull(),
 
                         Forms\Components\TextInput::make('banner_video_url')
-                            ->label('Contenido en lenguaje de señas')
-                            ->helperText('URL del video de contenido en lenguaje de señas')
+                            ->label('Contenido en lengua de señas')
+                            ->helperText('URL del video de contenido en lengua de señas')
                             ->url()
                             ->nullable()
                             ->columnSpanFull(),

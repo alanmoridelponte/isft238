@@ -3,15 +3,14 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Models\Category;
-use Filament\Forms;
+use Camya\Filament\Forms\Components\TitleWithSlugInput;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
-use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Unique;
 
 class CategoryResource extends Resource {
     protected static ?string $model                = Category::class;
@@ -28,25 +27,33 @@ class CategoryResource extends Resource {
             ->schema([
                 Section::make('Información básica')
                     ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->label('Nombre')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(Category::class, 'name', ignoreRecord: true)
-                            ->reactive()
-                            ->debounce(600)
-                            ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
-                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 13]),
-
-                        Forms\Components\TextInput::make('slug')
-                            ->label('Alias')
-                            ->required()
-                            ->unique(Category::class, 'slug', ignoreRecord: true)
-                            ->helperText('Fragmento de URL amigable')
-                            ->dehydrated(fn($state) => ! empty($state))
-                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 11]),
-                    ])
-                    ->columns(['default' => 6, 'md' => 12, 'lg' => 24]),
+                        TitleWithSlugInput::make(
+                            fieldTitle: 'name',
+                            fieldSlug: 'slug',
+                            urlPath: '/blog/etiquetas/',
+                            urlVisitLinkVisible: false,
+                            titleLabel: 'Nombre de la etiqueta',
+                            titlePlaceholder: 'Inserta el nombre de la etiqueta...',
+                            slugLabel: 'URL:',
+                            titleRules: [
+                                'required',
+                                'string',
+                                'min:3',
+                                'max:255',
+                            ],
+                            titleRuleUniqueParameters: [
+                                'ignorable'       => fn(?Category $record)       => $record,
+                                'modifyRuleUsing' => fn(Unique $rule) => $rule->whereNull('deleted_at'),
+                                'column'          => 'name',
+                                'ignoreRecord'    => true,
+                            ],
+                            slugRuleUniqueParameters: [
+                                'ignorable'    => fn(?Category $record)    => $record,
+                                'column'       => 'slug',
+                                'ignoreRecord' => true,
+                            ],
+                        ),
+                    ]),
             ]);
     }
 
