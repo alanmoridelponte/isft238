@@ -30,7 +30,7 @@ class CategoryResource extends Resource {
                         TitleWithSlugInput::make(
                             fieldTitle: 'name',
                             fieldSlug: 'slug',
-                            urlPath: '/blog/etiquetas/',
+                            urlPath: '/blog/',
                             urlVisitLinkVisible: false,
                             titleLabel: 'Nombre de la etiqueta',
                             titlePlaceholder: 'Inserta el nombre de la etiqueta...',
