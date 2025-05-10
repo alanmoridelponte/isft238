@@ -17,6 +17,7 @@ use Filament\Resources\Pages\ViewRecord;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Unique;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -115,7 +116,7 @@ class PostResource extends Resource {
                                     ->required()
                                     ->live()
                                     ->when(
-                                        auth()->user()->can('create_category'),
+                                        Auth::user()->can('create_category'),
                                         fn($select) => $select
                                             ->createOptionModalHeading('Crear nueva categoría')
                                             ->createOptionForm([
@@ -150,7 +151,7 @@ class PostResource extends Resource {
                                     ->preload()
                                     ->multiple()
                                     ->when(
-                                        auth()->user()->can('create_tag'),
+                                        Auth::user()->can('create_tag'),
                                         fn($select) => $select
                                             ->createOptionModalHeading('Crear nueva etiqueta')
                                             ->createOptionForm([
