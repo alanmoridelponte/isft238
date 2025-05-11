@@ -52,8 +52,7 @@ class TagResource extends Resource {
                                 'column'       => 'slug',
                                 'ignoreRecord' => true,
                             ],
-                        )
-                            ->columnSpan('full'),
+                        ),
                     ]),
             ]);
     }
