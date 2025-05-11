@@ -2,12 +2,15 @@
 namespace App\Filament\Pages;
 
 use App\Settings\GeneralSettings;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
 
 class ManageGeneralPage extends SettingsPage {
+    use HasPageShield;
+
     protected static ?string $navigationLabel      = 'General';
     protected ?string $heading                     = 'Configuración general';
     protected static ?string $navigationIcon       = 'heroicon-o-cog-6-tooth';
