@@ -10,7 +10,6 @@ use Camya\Filament\Forms\Components\TitleWithSlugInput;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
-use Filament\Forms\Set;
 use Filament\Pages\Page;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Resources\Pages\ViewRecord;
@@ -122,25 +121,34 @@ class PostResource extends Resource {
                                             ->createOptionForm([
                                                 Forms\Components\Grid::make()
                                                     ->schema([
-                                                        Forms\Components\TextInput::make('name')
-                                                            ->label('Nombre')
-                                                            ->required()
-                                                            ->maxLength(255)
-                                                            ->unique(Category::class, 'name')
-                                                            ->reactive()
-                                                            ->debounce(600)
-                                                            ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
-                                                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 13]),
-
-                                                        Forms\Components\TextInput::make('slug')
-                                                            ->label('Alias')
-                                                            ->required()
-                                                            ->unique(Category::class, 'slug')
-                                                            ->helperText('Fragmento de URL amigable')
-                                                            ->dehydrated(fn($state) => ! empty($state))
-                                                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 11]),
-                                                    ])
-                                                    ->columns(['default' => 6, 'md' => 12, 'lg' => 24]),
+                                                        TitleWithSlugInput::make(
+                                                            fieldTitle: 'name',
+                                                            fieldSlug: 'slug',
+                                                            urlPath: '/blog/',
+                                                            urlVisitLinkVisible: false,
+                                                            titleLabel: 'Nombre de la categoría',
+                                                            titlePlaceholder: 'Inserta el nombre de la categoría...',
+                                                            slugLabel: 'URL:',
+                                                            titleRules: [
+                                                                'required',
+                                                                'string',
+                                                                'min:3',
+                                                                'max:255',
+                                                            ],
+                                                            titleRuleUniqueParameters: [
+                                                                'ignorable'       => fn(?Category $record)       => $record,
+                                                                'modifyRuleUsing' => fn(Unique $rule) => $rule->whereNull('deleted_at'),
+                                                                'column'          => 'name',
+                                                                'ignoreRecord'    => true,
+                                                            ],
+                                                            slugRuleUniqueParameters: [
+                                                                'ignorable'    => fn(?Category $record)    => $record,
+                                                                'column'       => 'slug',
+                                                                'ignoreRecord' => true,
+                                                            ],
+                                                        )
+                                                            ->columnSpan('full'),
+                                                    ]),
                                             ])
                                     ),
 
@@ -157,25 +165,34 @@ class PostResource extends Resource {
                                             ->createOptionForm([
                                                 Forms\Components\Grid::make()
                                                     ->schema([
-                                                        Forms\Components\TextInput::make('name')
-                                                            ->label('Nombre')
-                                                            ->required()
-                                                            ->maxLength(255)
-                                                            ->unique(Tag::class, 'name')
-                                                            ->reactive()
-                                                            ->debounce(600)
-                                                            ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
-                                                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 13]),
-
-                                                        Forms\Components\TextInput::make('slug')
-                                                            ->label('Alias')
-                                                            ->required()
-                                                            ->unique(Tag::class, 'slug')
-                                                            ->helperText('Fragmento de URL amigable')
-                                                            ->dehydrated(fn($state) => ! empty($state))
-                                                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 11]),
-                                                    ])
-                                                    ->columns(['default' => 6, 'md' => 12, 'lg' => 24]),
+                                                        TitleWithSlugInput::make(
+                                                            fieldTitle: 'name',
+                                                            fieldSlug: 'slug',
+                                                            urlPath: '/blog/etiquetas/',
+                                                            urlVisitLinkVisible: false,
+                                                            titleLabel: 'Nombre de la etiqueta',
+                                                            titlePlaceholder: 'Inserta el nombre de la etiqueta...',
+                                                            slugLabel: 'URL:',
+                                                            titleRules: [
+                                                                'required',
+                                                                'string',
+                                                                'min:3',
+                                                                'max:255',
+                                                            ],
+                                                            titleRuleUniqueParameters: [
+                                                                'ignorable'       => fn(?Tag $record)       => $record,
+                                                                'modifyRuleUsing' => fn(Unique $rule) => $rule->whereNull('deleted_at'),
+                                                                'column'          => 'name',
+                                                                'ignoreRecord'    => true,
+                                                            ],
+                                                            slugRuleUniqueParameters: [
+                                                                'ignorable'    => fn(?Tag $record)    => $record,
+                                                                'column'       => 'slug',
+                                                                'ignoreRecord' => true,
+                                                            ],
+                                                        )
+                                                            ->columnSpan('full'),
+                                                    ]),
                                             ])
                                     ),
                             ])

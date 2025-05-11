@@ -32,8 +32,8 @@ class CategoryResource extends Resource {
                             fieldSlug: 'slug',
                             urlPath: '/blog/',
                             urlVisitLinkVisible: false,
-                            titleLabel: 'Nombre de la etiqueta',
-                            titlePlaceholder: 'Inserta el nombre de la etiqueta...',
+                            titleLabel: 'Nombre de la categoría',
+                            titlePlaceholder: 'Inserta el nombre de la categoría...',
                             slugLabel: 'URL:',
                             titleRules: [
                                 'required',
