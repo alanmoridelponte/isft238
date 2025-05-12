@@ -1,7 +1,9 @@
 <?php
 namespace App\Providers;
 
+use App\Settings\GeneralSettings;
 use BezhanSalleh\FilamentShield\FilamentShield;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -17,5 +19,9 @@ class AppServiceProvider extends ServiceProvider {
      */
     public function boot(): void {
         FilamentShield::prohibitDestructiveCommands($this->app->isProduction());
+
+        View::composer('*.public.*', function ($view) {
+            $view->with('general_setting', app(GeneralSettings::class));
+        });
     }
 }
