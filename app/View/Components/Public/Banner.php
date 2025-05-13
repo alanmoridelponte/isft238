@@ -7,8 +7,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Banner extends Component {
-    public array $leftItems  = [];
-    public array $rightItems = [];
+    private array $leftItems  = [];
+    private array $rightItems = [];
 
     /**
      * Create a new component instance.

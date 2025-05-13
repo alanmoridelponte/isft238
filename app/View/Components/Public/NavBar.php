@@ -6,7 +6,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class NavBar extends Component {
-    public array $menu = [];
+    private array $menu = [];
 
     /**
      * Create a new component instance.
