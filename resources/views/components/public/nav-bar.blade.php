@@ -18,9 +18,9 @@
             <!-- Botón móvil -->
             <div class="md:hidden">
                 <button id="mobile-menu-toggle" class="flex flex-col justify-evenly h-8 text-gray-700 hover:text-blue-600 focus:outline-none transition-all duration-400">
-                  <div class="bar w-[31px] h-[4px] bg-gray-800 transition-transform duration-400 origin-center"></div>
-                  <div class="bar w-[31px] h-[4px] bg-gray-800 transition-opacity duration-400"></div>
-                  <div class="bar w-[31px] h-[4px] bg-gray-800 transition-transform duration-400 origin-center"></div>
+                  <div class="bar w-[31px] h-[4px] bg-blue-800 transition-transform duration-400 origin-center"></div>
+                  <div class="bar w-[31px] h-[4px] bg-blue-800 transition-opacity duration-400"></div>
+                  <div class="bar w-[31px] h-[4px] bg-blue-800 transition-transform duration-400 origin-center"></div>
                 </button>
               </div>
     </nav>
@@ -45,7 +45,7 @@
         menu.classList.toggle('hidden');
 
         this.classList.toggle('open');
-        const [bar1, bar2, bar3] = this.querySelectorAll('div');
+        const [bar1, bar2, bar3] = this.querySelectorAll('.bar');
 
         bar1.classList.toggle('rotate-[-45deg]');
         bar1.classList.toggle('translate-y-[9px]');

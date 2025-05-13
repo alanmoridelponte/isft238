@@ -7,7 +7,7 @@
             </a>
             @endforeach
         </div>
-        <div class="flex space-x-4 hidden md:block">
+        <div class="space-x-4 hidden md:flex">
             @foreach ($rightItems as $item)
             <a href="{{ $item['href'] }}" class="text-sm hover:text-blue-200 tracking-tighter">
                 {{ $item['name'] }}<i class="fas {{ $item['icon'] }} ml-1"></i>
