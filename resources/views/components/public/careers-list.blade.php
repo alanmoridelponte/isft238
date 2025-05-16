@@ -1,3 +1,4 @@
+@if (!$careers->isEmpty())
 <section id="carreras" class="py-16 bg-gray-100">
     <div class="mx-auto px-0 md:px-6">
         {{ $slot }}
@@ -8,3 +9,4 @@
         </div>
     </div>
 </section>
+@endif

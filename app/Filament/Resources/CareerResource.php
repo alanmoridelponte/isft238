@@ -58,18 +58,23 @@ class CareerResource extends Resource {
                                     ],
                                 ),
 
+                                Forms\Components\TextInput::make('resolution')
+                                    ->label('Resolución de carrera')
+                                    ->helperText('Ejemplo: Resolución Ministerial N° 1234/2023')
+                                    ->required(),
+
                                 Forms\Components\TextArea::make('excerpt')
-                                    ->label('Extracto')
+                                    ->label('Detalle de tarjeta')
                                     ->required()
                                     ->maxLength(255)
-                                    ->rows(6)
-                                    ->helperText('Resumen breve de la carrera para la página principal'),
+                                    ->rows(3)
+                                    ->helperText('Resumen breve de la carrera para la página principal y listado de carreras'),
                             ])
                             ->columnSpan(['default' => 1, 'md' => 13, 'lg' => 24, 'xl' => 14]),
                         Forms\Components\Section::make('Características de carrera')
                             ->schema([
                                 Forms\Components\ToggleButtons::make('status')
-                                    ->label('Estado')
+                                    ->label('Estado en sitio web')
                                     ->options(CareerStatus::class)
                                     ->default(CareerStatus::DRAFT->value)
                                     ->required()
@@ -100,12 +105,34 @@ class CareerResource extends Resource {
                             ->required()
                             ->columnSpanFull(),
 
-                        Forms\Components\RichEditor::make('body')
+                        Forms\Components\Repeater::make('study_plan')
                             ->label('Plan de Estudio')
                             ->helperText('Descripción breve del plan de estudio, enumerando las asignaturas y su duración')
-                            ->fileAttachmentsDirectory('career-attachments')
-                            ->required()
-                            ->columnSpanFull(),
+                            ->columnSpanFull()
+                            ->minItems(1)
+                            ->addable(true)
+                            ->reorderableWithDragAndDrop(true)
+                            ->grid(3)
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->label('Nombre del periodo')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->helperText('Ejemplo: 1º Año, Primer cuatrimestre, etc.'),
+                                Forms\Components\Repeater::make('subjects')
+                                    ->label('Materias a cursar')
+                                    ->columnSpanFull()
+                                    ->minItems(1)
+                                    ->addable(true)
+                                    ->reorderableWithDragAndDrop(true)
+                                    ->grid(1)
+                                    ->schema([
+                                        Forms\Components\TextInput::make('subject')
+                                            ->label('Nombre de la materia')
+                                            ->required()
+                                            ->maxLength(255),
+                                    ]),
+                            ]),
                     ]),
             ]);
     }
@@ -116,6 +143,19 @@ class CareerResource extends Resource {
                 Tables\Columns\TextColumn::make('title')
                     ->label('Título')
                     ->description(fn(Career $record): string => "carreras/{$record->slug}")
+                    ->searchable()
+                    ->sortable()
+                    ->limit(50),
+
+                Tables\Columns\TextColumn::make('resolution')
+                    ->label('Resolución de carrera')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(50),
+
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->label('Estado en sitio web')
                     ->searchable()
                     ->sortable()
                     ->limit(50),

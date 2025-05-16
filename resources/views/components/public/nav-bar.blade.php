@@ -2,7 +2,7 @@
     <nav class="container mx-auto px-4">
         <div class="flex justify-between items-center py-4">
             <div class="flex items-center">
-                <a href="#" class="flex items-center">
+                <a href="{{ route('home') }}" class="flex items-center">
                     <span class="text-2xl font-bold text-blue-800 mr-2">ISFT</span>
                     <span class="text-2xl font-bold text-blue-600">238</span>
                 </a>

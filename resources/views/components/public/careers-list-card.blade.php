@@ -14,7 +14,7 @@
             </span>
         </div>
         <div class="flex items-center text-sm text-gray-600 justify-start">
-            <a href="{{ route('careers.show', ['slug' => $career->slug ?? 'not-found']) }}" class="inline-block bg-blue-800 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300">Más información</a>
+            <a href="{{ route('careers.show', ['career' => $career->slug ?? 'not-found']) }}" class="inline-block bg-blue-800 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300">Más información</a>
         </div>
      </div>
 </div>

@@ -14,11 +14,12 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->string('resolution');
             $table->string('excerpt');
             $table->string('duration');
             $table->string('modality');
             $table->text('scope');
-            $table->text('body');
+            $table->json('study_plan')->nullable();
             $table->enum('status', array_column(CareerStatus::cases(), 'value'))->default(CareerStatus::DRAFT->value);
             $table->timestamps();
             $table->softDeletes();
