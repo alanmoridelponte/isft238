@@ -13,16 +13,18 @@ class Career extends Model {
     protected $fillable = [
         'title',
         'slug',
+        'resolution',
         'excerpt',
         'duration',
         'modality',
         'scope',
-        'body',
+        'study_plan',
         'status',
     ];
 
     protected $casts = [
-        'status' => CareerStatus::class,
+        'status'     => CareerStatus::class,
+        'study_plan' => 'array',
     ];
 
     protected $routeKeyName;
