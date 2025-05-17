@@ -17,8 +17,8 @@
                     <div class="bg-green-50 p-5 rounded-xl shadow-sm hover:shadow-md transition sm:col-span-2">
                         <h2 class="text-green-800 text-3xl font-bold mb-2"><i class="fas fa-graduation-cap mr-2"></i>Título de Grado</h3>
                         <p class="text-gray-700">
-                            <strong>{{ $career->title }}</strong><br>
-                            {{ $career->resolution }}
+                            <span class="font-bold">{{ $career->title }}</span><br>
+                            <span class="font-semibold">{{ $career->resolution }}</span>
                         </p>
                     </div>
                     <div class="bg-amber-50 p-5 rounded-xl shadow-sm hover:shadow-md transition">
@@ -39,6 +39,7 @@
     </section>
 
     <!-- Plan de Estudios -->
+    <hr class="container mx-auto px-4">
     <section class="container mx-auto px-4 py-8">
         <h2 class="text-3xl font-bold text-blue-800 mb-12">Plan de Estudios</h2>
         <div class="grid md:grid-cols-3 gap-6">
@@ -57,10 +58,11 @@
         </div>
     </section>
 
-
-
-    <hr class="container mx-auto px-4 mt-20">
+    <!-- Otras carreras -->
+    <hr class="container mx-auto px-4 mt-12">
+    <div class="bg-white">
     <x-public.careers-list :exclude-career="$career" :randomize="true" :limit="3">
-        <h2 class="text-2xl font-semibold text-center mb-10">Otras carreras que te pueden interesar</h2>
+        <h2 class="text-xl md:text-2xl font-semibold text-center text-gray-700 mb-10 mx-2">Otras carreras que te pueden interesar</h2>
     </x-public.careers-list>
+    </div>
 @endsection
