@@ -20,7 +20,7 @@
           </a>
         @endforeach
       </div>
-      <div class="flex flex-col gap-x-4">
+      <div class="flex flex-col gap-y-4">
         @foreach ($data as $datum)
           <a href="{{ $datum['href'] }}" class="text-white-400">
             @if(!empty($datum['icon']))<i class="fas {{ $datum['icon'] }} text-xl mr-2"></i>@endif{{ $datum['name'] }}
@@ -33,11 +33,11 @@
     <div>
       <h2 class="text-xl font-semibold mb-4 text-white">Enlaces rápidos</h2>
       <ul class="space-y-2 text-white-300">
-        <li><a href="#" class="hover:underline hover:text-white">Inicio</a></li>
-        <li><a href="#" class="hover:underline hover:text-white">Oferta Académica</a></li>
-        <li><a href="#" class="hover:underline hover:text-white">Alumnos</a></li>
-        <li><a href="#" class="hover:underline hover:text-white">Docentes</a></li>
-        <li><a href="#" class="hover:underline hover:text-white">Contacto</a></li>
+        @foreach ($menu as $item)
+        <li>
+            <a href="{{ $item['url'] }}" class="@if($item['active']) font-bold @endif hover:text-blue-200">{{ $item['name'] }}</a>
+        </li>
+        @endforeach
       </ul>
     </div>
 
