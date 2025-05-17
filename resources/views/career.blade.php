@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Encabezado de la carrera -->
-    <header class="bg-green-700 text-white py-10">
+    <header class="bg-green-700 text-white py-16">
         <div class="container mx-auto px-4 text-center">
             <h1 class="text-3xl md:text-4xl font-bold">{{ $career->title }}</h1>
             <p class="mt-3 text-md md:text-lg">{{ $career->excerpt }}</p>
