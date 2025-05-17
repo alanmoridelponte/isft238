@@ -9,9 +9,14 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-50">
-    <x-public.banner />
-    <x-public.nav-bar />
-    @yield('content')
+    <main class="min-h-screen flex flex-col justify-between">
+        <x-public.banner />
+        <x-public.nav-bar />
+        <div class="flex-grow">
+            @yield('content')
+        </div>
+        <x-public.footer />
+    </main>
     @yield('scripts')
 </body>
 </html>

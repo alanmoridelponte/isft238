@@ -11,12 +11,10 @@ class GeneralSettings extends Settings {
     public string $institute_address;
     public string $institute_phone;
     public string $institute_email;
+    public string $institute_whatsapp;
     public string $institute_facebook;
     public string $institute_instagram;
-    public string $institute_twitter;
     public string $institute_youtube;
-    public string $institute_whatsapp;
-    public string $institute_linkedin;
 
     public static function group(): string {
         return 'general';
