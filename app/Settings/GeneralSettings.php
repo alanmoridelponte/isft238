@@ -9,6 +9,9 @@ class GeneralSettings extends Settings {
     public string $institute_initialism;
     public string $institute_motto;
     public string $institute_address;
+    public string $institute_business_hours;
+    public string $institute_maps_iframe;
+    public string $institute_maps_external_link;
     public string $institute_phone;
     public string $institute_email;
     public string $institute_whatsapp;

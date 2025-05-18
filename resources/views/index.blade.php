@@ -1,13 +1,4 @@
 @extends('layouts.public.page')
-@section('header')
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-html {
-    font-family: Rubik, sans-serif!important;
-}
-</style>
-@endsection
-
 
 @section('content')
 <section class="relative h-[calc(100vh-96px)] md:h-[calc(100vh-100px)] w-full overflow-hidden">
@@ -35,7 +26,6 @@ html {
         </div>
     </section>
   </div>
-
 </section>
 
 

@@ -6,6 +6,12 @@
     <title>{{ $general_setting->institute_initialism }} - {{ $general_setting->institute_name }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css ">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+    html {
+        font-family: Rubik, sans-serif!important;
+    }
+    </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('header')
 </head>
