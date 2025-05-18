@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 use App\Settings\GeneralSettings;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
@@ -67,12 +68,37 @@ class ManageGeneralPage extends SettingsPage {
                             ->maxLength(255)
                             ->dehydrateStateUsing(fn($state) => $state ?: '')
                             ->dehydrated(),
+                        TextInput::make('institute_business_hours')
+                            ->label('Horario de atención')
+                            ->placeholder('Ingrese horario de atención del instituto')
+                            ->helperText('Ejemplo: Lunes a Viernes: 8:00 - 20:00')
+                            ->required()
+                            ->maxLength(255)
+                            ->dehydrateStateUsing(fn($state) => $state ?: '')
+                            ->dehydrated(),
                         TextInput::make('institute_phone')
                             ->label('Teléfono del instituto')
                             ->placeholder('Ingrese teléfono del instituto')
                             ->required()
                             ->maxLength(20)
                             ->dehydrateStateUsing(fn($state) => $state ?: '')
+                            ->dehydrated(),
+
+                        TextInput::make('institute_maps_iframe')
+                            ->label('Configuración de mapa en "Contactos" - Enlace embebido')
+                            ->placeholder('Ingrese URL del mapa')
+                            ->url()
+                            ->helperText('Enlace de mapa embebido OpenStreetMap o Google Maps')
+                            ->required()
+                            ->dehydrateStateUsing(fn($state) => $state ?: 'https://www.openstreetmap.org/export/embed.html?bbox=-57.498525381088264%2C-37.82192316510236%2C-57.49404609203339%2C-37.820037469785895&amp;layer=mapnik&amp;marker=-37.82098032346613%2C-57.49628573656082')
+                            ->dehydrated(),
+                        TextInput::make('institute_maps_external_link')
+                            ->label('Configuración de mapa en "Contactos" - Enlace externo')
+                            ->placeholder('Ingrese URL del mapa')
+                            ->url()
+                            ->helperText('Enlace para ir a OpenStreetMap o Google Maps')
+                            ->required()
+                            ->dehydrateStateUsing(fn($state) => $state ?: 'https://www.openstreetmap.org/?mlat=-37.820980&amp;mlon=-57.496286#map=19/-37.820980/-57.496286')
                             ->dehydrated(),
                     ]),
                 Forms\Components\Section::make('Redes sociales')
