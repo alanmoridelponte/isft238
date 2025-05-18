@@ -24,6 +24,11 @@ class NavBar extends Component {
                 'active' => request()->routeIs('institutional'),
             ],
             [
+                'name'   => 'Contacto',
+                'url'    => route('contact'),
+                'active' => request()->routeIs('contact'),
+            ],
+            [
                 'name'   => 'Carreras',
                 'url'    => route('careers'),
                 'active' => request()->routeIs('careers'),
@@ -32,11 +37,6 @@ class NavBar extends Component {
                 'name'   => 'Noticias',
                 'url'    => route('blog'),
                 'active' => request()->routeIs('blog'),
-            ],
-            [
-                'name'   => 'Contacto',
-                'url'    => route('contact'),
-                'active' => request()->routeIs('contact'),
             ],
         ];
     }

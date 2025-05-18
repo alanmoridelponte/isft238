@@ -13,9 +13,6 @@ class Footer extends Component {
     private array $menu    = [];
 
     public function __construct(GeneralSettings $generalSettings) {
-        if (! empty($generalSettings->institute_motto)) {
-            $this->motto = $generalSettings->institute_motto;
-        }
         if (! empty($generalSettings->institute_email)) {
             $this->data[] = [
                 'name' => $generalSettings->institute_email,
@@ -83,6 +80,11 @@ class Footer extends Component {
                 'active' => request()->routeIs('institutional'),
             ],
             [
+                'name'   => 'Contacto',
+                'url'    => route('contact'),
+                'active' => request()->routeIs('contact'),
+            ],
+            [
                 'name'   => 'Carreras',
                 'url'    => route('careers'),
                 'active' => request()->routeIs('careers'),
@@ -92,11 +94,6 @@ class Footer extends Component {
                 'url'    => route('blog'),
                 'active' => request()->routeIs('blog'),
             ],
-            [
-                'name'   => 'Contacto',
-                'url'    => route('contact'),
-                'active' => request()->routeIs('contact'),
-            ],
         ];
     }
 
@@ -105,7 +102,6 @@ class Footer extends Component {
      */
     public function render(): View | Closure | string {
         return view('components.public.footer', [
-            'motto'   => $this->motto,
             'data'    => $this->data,
             'socials' => $this->socials,
             'menu'    => $this->menu,

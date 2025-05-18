@@ -3,8 +3,7 @@
         <div class="flex justify-between items-center py-4">
             <div class="flex items-center">
                 <a href="{{ route('home') }}" class="flex items-center">
-                    <span class="text-2xl font-bold text-blue-800 mr-2">ISFT</span>
-                    <span class="text-2xl font-bold text-blue-600">238</span>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-blue-800 via-emerald-600 via-55% to-yellow-500 to-95% bg-clip-text text-transparent">ISFT 238</span>
                 </a>
             </div>
 
