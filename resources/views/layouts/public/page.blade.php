@@ -7,11 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css ">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @yield('header')
 </head>
 <body class="bg-gray-50">
-    <x-public.banner />
-    <x-public.nav-bar />
-    @yield('content')
+    <main class="min-h-screen flex flex-col justify-between">
+        <x-public.banner />
+        <x-public.nav-bar />
+        <div class="flex-grow">
+            @yield('content')
+        </div>
+        <x-public.footer />
+    </main>
     @yield('scripts')
 </body>
 </html>

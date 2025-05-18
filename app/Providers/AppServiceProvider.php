@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider {
     public function boot(): void {
         FilamentShield::prohibitDestructiveCommands($this->app->isProduction());
 
-        View::composer('*.public.*', function ($view) {
+        View::composer('*', function ($view) {
             $view->with('general_setting', app(GeneralSettings::class));
         });
     }
