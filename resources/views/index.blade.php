@@ -3,7 +3,7 @@
 <section class="relative h-[calc(100vh-96px)] md:h-[calc(100vh-100px)] w-full overflow-hidden">
    <!-- Video de fondo -->
    <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover z-0">
-      <source src="https://cuono.dev/video1.mp4" type="video/mp4" />
+      <source src="https://www.ucaece.edu.ar/assets/uploads/app.web.base/customslider/video/55e2017fffc3450981648beed44a2bf6.mp4" type="video/mp4" />
    </video>
    <!-- Capa de overlay oscura si la necesitás -->
    <div class="absolute inset-0 bg-black/50 z-10"></div>
