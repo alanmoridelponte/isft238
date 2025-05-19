@@ -63,7 +63,7 @@ class CareerResource extends Resource {
                                     ->helperText('Ejemplo: Resolución Ministerial N° 1234/2023')
                                     ->required(),
 
-                                Forms\Components\TextArea::make('excerpt')
+                                Forms\Components\Textarea::make('excerpt')
                                     ->label('Detalle de tarjeta')
                                     ->required()
                                     ->maxLength(255)
