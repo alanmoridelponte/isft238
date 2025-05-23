@@ -8,8 +8,19 @@
    <!-- Capa de overlay oscura si la necesitás -->
    <div class="absolute inset-0 bg-black/50 z-10"></div>
    <!-- Texto lateral tipo cápsula -->
-   <div class="absolute z-20 left-0 top-1/4 w-[85%] md:w-[67%] lg:w-[70%] xl:w-[55%]">
-      <section class="bg-gradient-to-r from-blue-50 via-green-50 to-amber-50 pt-12 pb-6 mb-2 pl-8 pr-6 shadow-2xl rounded-tr-lg">
+   <div class="absolute z-20 left-0 top-1/4 transform -translate-y-1/4 w-[85%] md:w-[67%] lg:w-[70%] xl:w-[55%]">
+      <section class="bg-gradient-to-r from-blue-50 via-green-50 to-amber-50 shadow-2xl rounded-tr-lg">
+         <div class="max-h-4xl max-w-4xl mx-auto text-left">
+            <picture>
+  <!-- Imagen para pantallas grandes -->
+  <source srcset="assets/banner-lg.jpg" media="(min-width: 1024px)">
+
+  <!-- Imagen para pantallas pequeñas -->
+  <img src="assets/banner.jpg" alt="Banner" class="w-full h-auto rounded-lg shadow-lg">
+</picture>
+         </div>
+      </section>
+      <section class="bg-gradient-to-r from-blue-50 via-green-50 to-amber-50 pt-12 pb-6 my-2 pl-8 pr-6 shadow-2xl">
          <div class="max-w-4xl mx-auto text-left">
             <h1 class="text-5xl md:text-6xl lg:text-8xl font-bold bg-gradient-to-r from-blue-800 via-emerald-600 via-55% to-yellow-500 to-75% bg-clip-text text-transparent">{{ $general_setting->institute_initialism }}</h1>
             <h2 class="text-2xl lg:text-4xl font-bold text-blue-900 mb-4">@breakResponsive($general_setting->institute_name)</h2>
@@ -29,7 +40,7 @@
    <div class="container mx-auto px-4">
       <div class="text-center mb-12">
          <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-800 via-green-800 to-amber-800 bg-clip-text text-transparent">¿Por qué elegir ISFT238?</h2>
-         <p class="text-gray-900 text-lg mt-2">Formamos profesionales técnicos con las competencias que el mercado demanda</p>
+         <p class="text-gray-900 text-lg mt-2">Formamos profesionales técnicos comprometidos con el territorio socio-productivo actual</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
          <div class="bg-blue-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
@@ -67,8 +78,8 @@
 
 <section class="py-16 bg-blue-800">
     <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">¿Listo para dar el siguiente paso en tu carrera?</h2>
-        <p class="text-lg text-white mb-8">Inscríbete ahora y comienza tu formación profesional con nosotros</p>
+        <h2 class="text-3xl font-bold text-white mb-4">Da el próximo paso en tu trayectoria académica</h2>
+        <p class="text-lg text-white mb-8">El Instituto Superior de Formación Técnica N.º 238 te invita a inscribirte y comenzar una formación integral, orientada a la excelencia y a las demandas del entorno profesional contemporáneo</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-16 text-left">
             @if ($general_setting->institute_email)
