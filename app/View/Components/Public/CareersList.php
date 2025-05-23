@@ -16,7 +16,7 @@ class CareersList extends Component {
         public bool $randomize = false,
         public int $limit = 0,
     ) {
-        $this->careers = Career::orderBy('created_at', 'desc')
+        $this->careers = Career::orderBy('created_at', 'asc')
             ->where('status', CareerStatus::PUBLISHED->value)
             ->where('deleted_at', null)
             ->when($this->excludeCareer, function ($query) {
