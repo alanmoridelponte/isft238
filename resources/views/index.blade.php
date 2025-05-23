@@ -16,7 +16,7 @@
             <source srcset="assets/banner-lg.jpg" media="(min-width: 1024px)">
 
             <!-- Imagen para pantallas pequeñas -->
-            <img src="assets/banner.jpg" alt="Banner" class="w-full h-auto">
+            <img src="assets/banner.jpg" alt="Banner" class="w-full h-auto rounded-tr-lg">
             </picture>
          </div>
       </section>
