@@ -9,15 +9,15 @@
    <div class="absolute inset-0 bg-black/50 z-10"></div>
    <!-- Texto lateral tipo cápsula -->
    <div class="absolute z-20 left-0 top-1/4 transform -translate-y-1/4 w-[85%] md:w-[67%] lg:w-[70%] xl:w-[55%]">
-      <section class="bg-gradient-to-r from-blue-50 via-green-50 to-amber-50 shadow-2xl rounded-tr-lg">
+      <section class="bg-white shadow-2xl rounded-tr-lg">
          <div class="max-h-4xl max-w-4xl mx-auto text-left">
             <picture>
-  <!-- Imagen para pantallas grandes -->
-  <source srcset="assets/banner-lg.jpg" media="(min-width: 1024px)">
+            <!-- Imagen para pantallas grandes -->
+            <source srcset="assets/banner-lg.jpg" media="(min-width: 1024px)">
 
-  <!-- Imagen para pantallas pequeñas -->
-  <img src="assets/banner.jpg" alt="Banner" class="w-full h-auto rounded-lg shadow-lg">
-</picture>
+            <!-- Imagen para pantallas pequeñas -->
+            <img src="assets/banner.jpg" alt="Banner" class="w-full h-auto">
+            </picture>
          </div>
       </section>
       <section class="bg-gradient-to-r from-blue-50 via-green-50 to-amber-50 pt-12 pb-6 my-2 pl-8 pr-6 shadow-2xl">
