@@ -78,12 +78,12 @@
 
 <section class="py-16 bg-blue-800">
     <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">Da el próximo paso en tu trayectoria académica</h2>
+        <h2 class="text-3xl font-bold text-white mb-4">Da el próximo paso en tu trayectoria profesional</h2>
         <p class="text-lg text-white mb-8">El Instituto Superior de Formación Técnica N.º 238 te invita a inscribirte y comenzar una formación integral, orientada a la excelencia y a las demandas del entorno profesional contemporáneo</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-16 text-left">
             @if ($general_setting->institute_email)
-            <div class="flex items-start space-x-4 mx-auto w-72 md:w-64 md:text-nowrap">
+            <div class="flex items-start space-x-4 mx-auto w-72">
                 <div class="bg-green-500 p-2.5 min-w-[3rem] flex justify-center rounded-lg text-white shadow">
                     <i class="fas fa-envelope text-xl"></i>
                 </div>
@@ -95,7 +95,7 @@
             @endif
 
             @if ($general_setting->institute_address)
-            <div class="flex items-start space-x-4 mx-auto w-72 md:w-64 md:text-nowrap">
+            <div class="flex items-start space-x-4 mx-auto w-72">
                 <div class="bg-amber-500 p-2.5 min-w-[3rem] flex justify-center rounded-lg text-white shadow">
                     <i class="fas fa-map-marker-alt text-xl"></i>
                 </div>
@@ -107,7 +107,7 @@
             @endif
 
             @if ($general_setting->institute_business_hours)
-            <div class="flex items-start space-x-4 mx-auto w-72 md:w-64 md:text-nowrap">
+            <div class="flex items-start space-x-4 mx-auto w-72">
                 <div class="bg-green-500 p-2.5 min-w-[3rem] flex justify-center rounded-lg text-white shadow">
                     <i class="fas fa-clock text-xl"></i>
                 </div>
@@ -119,7 +119,7 @@
             @endif
 
             @if ($general_setting->institute_phone)
-            <div class="flex items-start space-x-4 mx-auto w-72 md:w-64 md:text-nowrap">
+            <div class="flex items-start space-x-4 mx-auto w-72">
                 <div class="bg-amber-500 p-2.5 min-w-[3rem] flex justify-center rounded-lg text-white shadow">
                     <i class="fas fa-phone text-xl"></i>
                 </div>
@@ -140,27 +140,27 @@
 <section class="py-16 bg-gradient-to-b to-natural-50">
    <div class="container mx-auto px-4">
       <div class="text-center mb-12">
-         <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-800 via-green-800 to-amber-800 bg-clip-text text-transparent">Nuestras últimas novedades del blog</h2>
-         <p class="text-gray-900 text-lg mt-2">Descubrí artículos, noticias y consejos pensados para acompañarte en tu camino académico y profesional</p>
+         <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-800 via-amber-800 to-green-800 bg-clip-text text-transparent">Nuestras últimas novedades del blog</h2>
+         <p class="text-gray-900 text-lg mt-2">La Revista Digital isft238 es una publicación educativa, cuyo objetivo es consolidarse como un espacio para el encuentro y la difusión de saberes y experiencias del ámbito estudiantil y de la vida del instituto, aportando una mirada integradora y cooperativa</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
          <div class="bg-amber-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
             <div class="mb-4">
-               <i class="fas fa-graduation-cap text-5xl text-blue-700"></i>
+               <i class="fas fa-graduation-cap text-5xl text-amber-700"></i>
             </div>
             <h3 class="text-xl font-bold text-amber-800 mb-2">EN PROGRESO</h3>
             <p class="text-amber-900">EN PROGRESO - EN PROGRESO - EN PROGRESO - EN PROGRESO</p>
          </div>
          <div class="bg-amber-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
             <div class="mb-4">
-               <i class="fas fa-graduation-cap text-5xl text-blue-700"></i>
+               <i class="fas fa-graduation-cap text-5xl text-amber-700"></i>
             </div>
             <h3 class="text-xl font-bold text-amber-800 mb-2">EN PROGRESO</h3>
             <p class="text-amber-900">EN PROGRESO - EN PROGRESO - EN PROGRESO - EN PROGRESO</p>
          </div>
          <div class="bg-amber-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
             <div class="mb-4">
-               <i class="fas fa-graduation-cap text-5xl text-blue-700"></i>
+               <i class="fas fa-graduation-cap text-5xl text-amber-700"></i>
             </div>
             <h3 class="text-xl font-bold text-amber-800 mb-2">EN PROGRESO</h3>
             <p class="text-amber-900">EN PROGRESO - EN PROGRESO - EN PROGRESO - EN PROGRESO</p>
