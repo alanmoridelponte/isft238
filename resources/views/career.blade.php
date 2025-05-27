@@ -12,27 +12,41 @@
     <!-- Sobre la carrera -->
     <section class="bg-white py-16">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="bg-green-50 p-5 rounded-xl shadow-sm hover:shadow-md transition sm:col-span-2">
-                        <h2 class="text-green-800 text-3xl font-bold mb-2"><i class="fas fa-graduation-cap mr-2"></i>Título de Grado</h3>
-                        <p class="text-gray-700">
-                            <span class="font-bold">{{ $career->title }}</span><br>
-                            <span class="font-semibold">{{ $career->resolution }}</span>
-                        </p>
+
+                    <div class="bg-green-50 p-4 rounded-xl shadow-sm hover:shadow-md transition sm:col-span-2">
+                        <div class="flex items-center md:items-top justify-between gap-4 mb-4 md:mb-0">
+                            <div class="flex items-center justify-center w-12 lg:w-16 h-12 lg:h-16 rounded-md bg-gradient-to-br from-green-700 to-green-800">
+                                <i class="fas fa-graduation-cap text-2xl lg:text-3xl text-white"></i>
+                            </div>
+                            <h3 class="text-2xl lg:text-3xl flex-1 font-bold bg-gradient-to-br from-green-700 to-green-800 bg-clip-text text-transparent tracking-tight">
+                                Título de Grado<div class="hidden md:flex"><br><span class="text-xl font-semibold">{{ $career->resolution }}</span></div>
+                            </h3>
+                        </div>
+                        <span class="md:hidden text-xl font-semibold bg-gradient-to-br from-green-700 to-green-800 bg-clip-text text-transparent tracking-tight">{{ $career->resolution }}</span>
                     </div>
+
+                    <div class="bg-amber-50 p-4 rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center md:items-top justify-between gap-2">
+                            <div class="flex items-center justify-center w-10 lg:w-14 h-10 lg:h-14 rounded-md bg-gradient-to-br from-amber-700 to-amber-800">
+                                <i class="far fa-clock text-xl lg:text-3xl text-white font-bold"></i>
+                            </div>
+                            <h3 class="leading-none text-xl lg:text-2xl flex-1 font-bold bg-gradient-to-br from-amber-700 to-amber-800 bg-clip-text text-transparent tracking-tight">
+                                Duración<br><span class="text-lg font-semibold">{{ $career->duration }}</span>
+                            </h3>
+                        </div>
+                    </div>
+
                     <div class="bg-amber-50 p-5 rounded-xl shadow-sm hover:shadow-md transition">
-                        <h2 class="text-amber-800 font-semibold text-xl mb-2"><i class="far fa-clock mr-2"></i>Duración</h3>
-                        <p class="text-gray-700 font-medium">{{ $career->duration }}</p>
+                        <h2 class="text-amber-800 font-semibold text-xl lg:text-2xl mb-2"><i class="fas fa-chalkboard-teacher mr-2 font-semibold"></i>Modalidad</h3>
+                        <p class="text-gray-700 text-lg lg:text-xl font-medium">{{ $career->modality }}</p>
                     </div>
-                    <div class="bg-amber-50 p-5 rounded-xl shadow-sm hover:shadow-md transition">
-                        <h2 class="text-amber-800 font-semibold text-xl mb-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Modalidad</h3>
-                        <p class="text-gray-700 font-medium">{{ $career->modality }}</p>
-                    </div>
+
                 </div>
                 <div>
-                    <h2 class="text-3xl font-bold text-green-800 mb-6">Alcances del Título</h2>
-                    <p class="text-gray-700 text-lg leading-relaxed mb-4">{!! $career->scope !!}</p>
+                    <h2 class="text-2xl lg:text-3xl font-bold text-green-800 mb-6">Alcances del Título</h2>
+                    <div class="text-gray-700 text-md lg:text-lg leading-relaxed mb-4">{!! $career->scope !!}</div>
                 </div>
             </div>
         </div>

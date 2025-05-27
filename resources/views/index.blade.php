@@ -39,31 +39,32 @@
 <section class="py-16 bg-gradient-to-b to-natural-50">
    <div class="container mx-auto px-4">
       <div class="text-center mb-12">
-         <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-800 via-green-800 to-amber-800 bg-clip-text text-transparent">¿Por qué elegir ISFT238?</h2>
+         <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-800 via-green-800 to-amber-800 bg-clip-text text-transparent">¿Por qué elegir {{ $general_setting->institute_initialism }}?</h2>
          <p class="text-gray-900 text-lg mt-2">Formamos profesionales técnicos comprometidos con el territorio socio-productivo actual</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-         <div class="bg-blue-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
-            <div class="mb-4">
-               <i class="fas fa-graduation-cap text-5xl text-blue-700"></i>
-            </div>
-            <h3 class="text-xl font-bold text-blue-800 mb-2">Título Oficial</h3>
-            <p class="text-blue-900">Todas nuestras carreras cuentan con reconocimiento oficial y validez nacional.</p>
-         </div>
-         <div class="bg-green-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
-            <div class="mb-4">
-               <i class="fas fa-briefcase text-5xl text-green-700"></i>
-            </div>
-            <h3 class="text-xl font-bold text-green-800 mb-2">Salida Laboral</h3>
-            <p class="text-green-900">Formación orientada a las necesidades reales del mercado laboral actual.</p>
-         </div>
-         <div class="bg-amber-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
-            <div class="mb-4">
-               <i class="fas fa-institution text-amber-700 text-5xl"></i>
-            </div>
-            <h3 class="text-xl font-bold text-amber-800 mb-2">Docentes Expertos</h3>
-            <p class="text-amber-900">Profesionales en actividad que transmiten experiencia real y conocimientos actualizados.</p>
-         </div>
+
+        @include('includes.main-card', [
+            'color' => 'blue',
+            'icon' => 'fas fa-graduation-cap',
+            'title' => 'Título Oficial',
+            'text' => 'Todas nuestras carreras cuentan con reconocimiento oficial y validez nacional'
+        ])
+
+        @include('includes.main-card', [
+            'color' => 'green',
+            'icon' => 'fas fa-briefcase',
+            'title' => 'Salida Laboral',
+            'text' => 'Formación orientada a las necesidades reales del mercado laboral actual'
+        ])
+
+        @include('includes.main-card', [
+            'color' => 'amber',
+            'icon' => 'fas fa-chalkboard-teacher',
+            'title' => 'Docentes Expertos',
+            'text' => 'Profesionales en actividad que transmiten experiencia real y conocimientos actualizados'
+        ])
+
       </div>
    </div>
 </section>
