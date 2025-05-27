@@ -12,7 +12,7 @@
     <!-- Sobre la carrera -->
     <section class="bg-white py-16">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-10 items-start">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
                     <div class="bg-green-50 p-4 rounded-xl shadow-sm hover:shadow-md transition sm:col-span-2">
@@ -28,19 +28,27 @@
                     </div>
 
                     <div class="bg-amber-50 p-4 rounded-xl shadow-sm hover:shadow-md transition">
-                        <div class="flex items-center md:items-top justify-between gap-2">
-                            <div class="flex items-center justify-center w-10 lg:w-14 h-10 lg:h-14 rounded-md bg-gradient-to-br from-amber-700 to-amber-800">
-                                <i class="far fa-clock text-xl lg:text-3xl text-white font-bold"></i>
+                        <div class="flex items-center md:items-top justify-between gap-2 leading-none">
+                            <div class="flex items-center justify-center w-10 lg:w-12 h-10 lg:h-12 rounded-md bg-gradient-to-br from-amber-700 to-amber-800">
+                                <i class="far fa-clock text-xl lg:text-2xl text-white font-bold"></i>
                             </div>
-                            <h3 class="leading-none text-xl lg:text-2xl flex-1 font-bold bg-gradient-to-br from-amber-700 to-amber-800 bg-clip-text text-transparent tracking-tight">
-                                Duración<br><span class="text-lg font-semibold">{{ $career->duration }}</span>
+                            <h3 class="flex flex-col flex-1 bg-gradient-to-br from-amber-700 to-amber-800 bg-clip-text text-transparent tracking-tight">
+                                <span class="text-xl lg:text-2xl font-bold">Duración</span>
+                                <span class="text-md lg:text-lg font-semibold">{{ $career->duration }}</span>
                             </h3>
                         </div>
                     </div>
 
-                    <div class="bg-amber-50 p-5 rounded-xl shadow-sm hover:shadow-md transition">
-                        <h2 class="text-amber-800 font-semibold text-xl lg:text-2xl mb-2"><i class="fas fa-chalkboard-teacher mr-2 font-semibold"></i>Modalidad</h3>
-                        <p class="text-gray-700 text-lg lg:text-xl font-medium">{{ $career->modality }}</p>
+                    <div class="bg-amber-50 p-4 rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center md:items-top justify-between gap-2 leading-none">
+                            <div class="flex items-center justify-center w-10 lg:w-12 h-10 lg:h-12 rounded-md bg-gradient-to-br from-amber-700 to-amber-800">
+                                <i class="fas fa-chalkboard-teacher text-xl lg:text-2xl text-white font-bold"></i>
+                            </div>
+                            <h3 class="flex flex-col flex-1 bg-gradient-to-br from-amber-700 to-amber-800 bg-clip-text text-transparent tracking-tight">
+                                <span class="text-xl lg:text-2xl font-bold">Modalidad</span>
+                                <span class="text-md lg:text-lg font-semibold">{{ $career->modality }}</span>
+                            </h3>
+                        </div>
                     </div>
 
                 </div>
