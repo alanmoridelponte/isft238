@@ -80,7 +80,7 @@
 <section class="py-16 bg-blue-800">
     <div class="container mx-auto px-4 text-center">
         <h2 class="text-3xl font-bold text-white mb-4">Da el próximo paso en tu trayectoria profesional</h2>
-        <p class="text-lg text-white mb-8">El Instituto Superior de Formación Técnica N.º 238 te invita a inscribirte y comenzar una formación integral, orientada a la excelencia y a las demandas del entorno profesional contemporáneo</p>
+        <p class="text-lg text-white mb-8">El {{ $general_setting->institute_name }} te invita a inscribirte y comenzar una formación integral, orientada a la excelencia y a las demandas del entorno profesional contemporáneo</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-16 text-left">
             @if ($general_setting->institute_email)

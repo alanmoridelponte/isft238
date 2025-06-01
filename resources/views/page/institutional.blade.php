@@ -24,7 +24,7 @@
         <section class="py-16 bg-blue-800">
             <div class="container mx-auto px-4 text-left">
                 <h2 class="text-3xl font-bold text-white mb-4">{{ $general_setting->institute_motto }}</h2>
-                <p class="text-lg text-white mb-8"> El Instituto Superior de Formación Técnica N.º 238 es una institución
+                <p class="text-lg text-white mb-8"> El {{ $general_setting->institute_name }} es una institución
                     pública que ofrece carreras de nivel superior técnico con títulos oficiales y validez nacional. Nuestro enfoque se centra en la
                     formación de profesionales capaces de responder a las necesidades del entramado socio-productivo
                     actual.</p>
@@ -59,7 +59,7 @@
         <section class="py-16 bg-white">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="text-3xl font-bold text-blue-800 mb-4">Da el próximo paso en tu trayectoria profesional</h2>
-                <p class="text-lg text-blue-800 mb-8">El Instituto Superior de Formación Técnica N.º 238 te invita a
+                <p class="text-lg text-blue-800 mb-8">El {{ $general_setting->institute_name }} te invita a
                     inscribirte y comenzar una formación integral, orientada a la excelencia y a las demandas del entorno
                     profesional contemporáneo</p>
 

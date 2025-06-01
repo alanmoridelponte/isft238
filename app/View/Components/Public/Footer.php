@@ -86,13 +86,13 @@ class Footer extends Component {
             ],
             [
                 'name'   => 'Carreras',
-                'url'    => route('careers'),
-                'active' => request()->routeIs('careers'),
+                'url'    => route('careers.index'),
+                'active' => request()->routeIs('careers.index'),
             ],
             [
                 'name'   => 'Noticias',
-                'url'    => route('blog'),
-                'active' => request()->routeIs('blog'),
+                'url'    => route('blog.index'),
+                'active' => request()->routeIs('blog.index'),
             ],
         ];
     }

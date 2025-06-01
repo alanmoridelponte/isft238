@@ -1,11 +1,13 @@
 <?php
 
-use App\Models\Career;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CareerController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn() => view('index'))->name('home');
-Route::get('/institucional', fn() => view('institutional'))->name('institutional');
-Route::get('/carreras', fn() => view('careers'))->name('careers');
-Route::get('/carreras/{career}', fn(Career $career) => view('career', compact('career')))->name('careers.show');
-Route::get('/blog', fn() => view('index'))->name('blog');
-Route::get('/contacto', fn() => view('contact'))->name('contact');
+Route::get('/', [PageController::class, 'index'])->name('home');
+Route::get('/institucional', [PageController::class, 'institutional'])->name('institutional');
+Route::get('/contacto', [PageController::class, 'contact'])->name('contact');
+
+Route::resource('carreras', CareerController::class, CareerController::$options);
+Route::resource('blog', BlogController::class, BlogController::$options);
