@@ -71,18 +71,18 @@ class Footer extends Component {
         $this->menu = [
             [
                 'name'   => 'Inicio',
-                'url'    => route('home'),
-                'active' => request()->routeIs('home'),
+                'url'    => route('page.index'),
+                'active' => request()->routeIs('page.index'),
             ],
             [
                 'name'   => 'Institucional',
-                'url'    => route('institutional'),
-                'active' => request()->routeIs('institutional'),
+                'url'    => route('page.institutional'),
+                'active' => request()->routeIs('page.institutional'),
             ],
             [
                 'name'   => 'Contacto',
-                'url'    => route('contact'),
-                'active' => request()->routeIs('contact'),
+                'url'    => route('page.contact'),
+                'active' => request()->routeIs('page.contact'),
             ],
             [
                 'name'   => 'Carreras',

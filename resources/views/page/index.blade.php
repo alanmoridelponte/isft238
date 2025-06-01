@@ -132,7 +132,7 @@
             @endif
         </div>
 
-        <a href="{{ route('contact') }}" class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-lg transition duration-300 text-lg">
+        <a href="{{ route('page.contact') }}" class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-lg transition duration-300 text-lg">
             Contactá con nosotros
         </a>
     </div>
