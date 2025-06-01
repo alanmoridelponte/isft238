@@ -83,7 +83,7 @@
     <!-- Otras carreras -->
     <hr class="container mx-auto px-4 mt-12">
     <div class="bg-white">
-    <x-public.careers-list :exclude-career="$career" :randomize="true" :limit="3">
+    <x-public.careers-list :exclude-career="$career" :randomize="true" :limit="2">
         <h2 class="text-xl md:text-2xl font-semibold text-center text-gray-700 mb-10 mx-2">Otras carreras que te pueden interesar</h2>
     </x-public.careers-list>
     </div>

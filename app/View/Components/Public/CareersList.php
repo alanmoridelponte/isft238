@@ -16,19 +16,18 @@ class CareersList extends Component {
         public bool $randomize = false,
         public int $limit = 0,
     ) {
-        $this->careers = Career::orderBy('created_at', 'asc')
-            ->where('status', CareerStatus::PUBLISHED->value)
-            ->where('deleted_at', null)
-            ->when($this->excludeCareer, function ($query) {
-                return $query->where('id', '!=', $this->excludeCareer->id);
-            })
-            ->when($this->randomize, function ($query) {
-                return $query->inRandomOrder();
-            })
-            ->when($this->limit > 0, function ($query) {
-                return $query->limit($this->limit);
-            })
-            ->get();
+        if ($this->excludeCareer && $this->randomize && $this->limit > 0) {
+            $this->careers = Career::inRandomOrder()
+                ->take($this->limit)
+                ->where('id', '!=', $this->excludeCareer->id)
+                ->where('status', CareerStatus::PUBLISHED->value)
+                ->orderBy('created_at', 'asc')
+                ->get();
+        } else {
+            $this->careers = Career::orderBy('created_at', 'asc')
+                ->where('status', CareerStatus::PUBLISHED->value)
+                ->get();
+        }
     }
 
     public function render(): View | Closure | string {

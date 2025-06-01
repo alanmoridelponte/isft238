@@ -5,7 +5,7 @@
    <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover z-0">
       <source src="https://www.ucaece.edu.ar/assets/uploads/app.web.base/customslider/video/55e2017fffc3450981648beed44a2bf6.mp4" type="video/mp4" />
    </video>
-   <!-- Capa de overlay oscura si la necesitás -->
+   <!-- Capa de overlay oscura -->
    <div class="absolute inset-0 bg-black/50 z-10"></div>
    <!-- Texto lateral tipo cápsula -->
    <div class="absolute z-20 left-0 top-1/4 transform -translate-y-1/4 w-[85%] md:w-[67%] lg:w-[70%] xl:w-[55%]">
