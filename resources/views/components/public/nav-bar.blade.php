@@ -2,7 +2,7 @@
     <nav class="container mx-auto px-4">
         <div class="flex justify-between items-center py-4">
             <div class="flex items-center">
-                <a href="{{ route('home') }}" class="flex items-center">
+                <a href="{{ route('page.index') }}" class="flex items-center">
                     <span class="text-2xl font-bold bg-gradient-to-r from-blue-800 via-emerald-600 via-55% to-yellow-500 to-95% bg-clip-text text-transparent">{{ $general_setting->institute_initialism }}</span>
                 </a>
             </div>

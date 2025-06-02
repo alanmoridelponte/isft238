@@ -28,6 +28,10 @@ class Post extends Model {
         'status' => PostStatus::class,
     ];
 
+    public function scopePublished($query) {
+        return $query->where('status', PostStatus::PUBLISHED);
+    }
+
     public function category(): BelongsTo {
         return $this->belongsTo(Category::class);
     }

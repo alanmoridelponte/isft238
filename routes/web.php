@@ -1,11 +1,21 @@
 <?php
 
-use App\Models\Career;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CareerController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn() => view('index'))->name('home');
-Route::get('/institucional', fn() => view('index'))->name('institutional');
-Route::get('/carreras', fn() => view('careers'))->name('careers');
-Route::get('/carreras/{career}', fn(Career $career) => view('career', compact('career')))->name('careers.show');
-Route::get('/blog', fn() => view('index'))->name('blog');
-Route::get('/contacto', fn() => view('contact'))->name('contact');
+Route::controller(PageController::class)->group(function () {
+    Route::get('/', 'index')->name('page.index');
+    Route::get('/institutional', 'institutional')->name('page.institutional');
+    Route::get('/contact', 'contact')->name('page.contact');
+});
+
+Route::resource('carreras', CareerController::class, CareerController::$options);
+
+Route::prefix('blog')->name('blog.')->group(function () {
+    Route::get('/', [BlogController::class, 'index'])->name('index');
+    Route::get('/etiquetas/{tag}', [BlogController::class, 'byTag'])->name('tag');
+    Route::get('{category}', [BlogController::class, 'byCategory'])->name('category');
+    Route::get('{category}/{post}', [BlogController::class, 'show'])->name('show');
+});
