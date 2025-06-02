@@ -80,25 +80,25 @@
 
                 <!-- Redes sociales -->
                 <div class="mt-8">
-                    <h4 class="text-lg font-semibold text-amber-800 mb-3">Síguenos en redes sociales</h4>
+                    <h4 class="text-lg font-semibold text-amber-700 mb-3">Seguinos en redes sociales</h4>
                     <div class="flex gap-3">
                         @if ($general_setting->institute_whatsapp)
-                        <a href="{{ $general_setting->institute_whatsapp }}" class="hover:text-green-300 bg-amber-500 text-white p-2 min-w-[3rem] flex justify-center rounded-lg transition" aria-label="Whatsapp">
+                        <a href="{{ $general_setting->institute_whatsapp }}" class="hover:text-white bg-green-500 text-white p-2 min-w-[3rem] flex justify-center rounded-lg transition" aria-label="Whatsapp">
                             <i class="fab fa-whatsapp text-2xl"></i>
                         </a>
                         @endif
                         @if ($general_setting->institute_facebook)
-                        <a href="{{ $general_setting->institute_facebook }}" class="hover:text-blue-500 bg-amber-500 text-white p-2 min-w-[3rem] flex justify-center rounded-lg transition" aria-label="Facebook">
+                        <a href="{{ $general_setting->institute_facebook }}" class="hover:text-white bg-blue-600 text-white p-2 min-w-[3rem] flex justify-center rounded-lg transition" aria-label="Facebook">
                             <i class="fab fa-facebook-f text-2xl"></i>
                         </a>
                         @endif
                         @if ($general_setting->institute_instagram)
-                        <a href="{{ $general_setting->institute_instagram }}" class="hover:text-pink-400 bg-amber-500 text-white p-2 min-w-[3rem] flex justify-center rounded-lg transition" aria-label="Instagram">
+                        <a href="{{ $general_setting->institute_instagram }}" class="hover:text-white bg-pink-600 text-white p-2 min-w-[3rem] flex justify-center rounded-lg transition" aria-label="Instagram">
                             <i class="fab fa-instagram text-2xl"></i>
                         </a>
                         @endif
                         @if ($general_setting->institute_youtube)
-                        <a href="{{ $general_setting->institute_youtube }}" class="hover:text-red-500 bg-amber-500 text-white p-2 min-w-[3rem] flex justify-center rounded-lg transition" aria-label="Youtube">
+                        <a href="{{ $general_setting->institute_youtube }}" class="hover:text-white bg-red-600 text-white p-2 min-w-[3rem] flex justify-center rounded-lg transition" aria-label="Youtube">
                             <i class="fab fa-youtube text-2xl"></i>
                         </a>
                         @endif
