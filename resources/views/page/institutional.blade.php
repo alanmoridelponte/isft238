@@ -7,7 +7,7 @@
             <section class="bg-white">
                 <div class="max-h-4xl max-w-4xl mx-auto text-left">
                     <picture>
-                        <img src="assets/banner.jpg" alt="Banner" class="w-full h-auto">
+                        <img src="{{ asset('assets/banner.jpg') }}" alt="Banner" class="w-full h-auto">
                     </picture>
                 </div>
             </section>
