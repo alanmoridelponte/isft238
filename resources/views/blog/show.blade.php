@@ -6,7 +6,7 @@
         {{-- Botón Volver --}}
         <div class="mb-6">
             <a href="{{ route('blog.index') }}"
-                class="inline-flex items-center text-amber-700 text-sm font-medium">
+                class="inline-flex items-center text-amber-600 text-sm font-medium">
                 <i class="fas fa-arrow-left mr-2"></i> Volver al blog
             </a>
         </div>
@@ -18,25 +18,25 @@
             <nav aria-label="Breadcrumb">
                 <ol class="list-none flex flex-wrap items-center space-x-1">
                     <li>
-                        <a href="{{ route('page.index') }}" class="hover:underline text-amber-700 font-medium">
+                        <a href="{{ route('page.index') }}" class="hover:underline text-amber-600 font-medium">
                             <i class="fas fa-home mr-2"></i>Inicio
                         </a>
                     </li>
                     <li><span class="mx-1 text-gray-400"><i class="fas fa-chevron-right"></i></span></li>
                     <li>
-                        <a href="{{ route('blog.index') }}" class="hover:underline text-amber-700 font-medium">
+                        <a href="{{ route('blog.index') }}" class="hover:underline text-amber-600 font-medium">
                             Blog
                         </a>
                     </li>
                     <li><span class="mx-1 text-gray-400"><i class="fas fa-chevron-right"></i></span></li>
                     <li>
                         <a href="{{ route('blog.category', ['category' => $post->category->slug]) }}"
-                            class="hover:underline text-amber-700 font-medium">
+                            class="hover:underline text-amber-600 font-medium">
                             {{ $post->category->name }}
                         </a>
                     </li>
                     <li><span class="mx-1 text-gray-400"><i class="fas fa-chevron-right"></i></span></li>
-                    <li class="text-gray-600 truncate max-w-[12rem] sm:max-w-xs md:max-w-md" title="{{ $post->title }}">
+                    <li class="text-gray-600 truncate max-w-[24rem] sm:max-w-xs md:max-w-md" title="{{ $post->title }}">
                         {{ $post->title }}
                     </li>
                 </ol>
@@ -44,8 +44,7 @@
 
             {{-- Tiempo de lectura --}}
             <div class="text-xs italic text-right text-gray-500 whitespace-nowrap">
-                <i class="fas fa-clock text-amber-500 mr-1"></i>{{ ceil(str_word_count(strip_tags($post->body)) / 200) }}
-                min de lectura
+                <i class="fas fa-calendar-alt text-amber-500 mr-1"></i>{{ $post->created_at->diffForHumans() }}
             </div>
         </div>
 
@@ -53,7 +52,7 @@
         <article class="bg-white rounded-xl shadow overflow-hidden">
             {{-- Imagen arriba --}}
             <img src="{{ asset($post->banner) }}" alt="Imagen de {{ $post->title }}"
-                class="w-full aspect-video object-cover object-center bg-amber-800">
+                class="w-full aspect-video object-cover object-center bg-amber-600">
 
             <hr>
 
@@ -62,17 +61,17 @@
                 <div class="flex flex-wrap justify-between items-center text-sm text-gray-500 mb-4">
                     <div class="flex items-center gap-2">
                         <a href="{{ route('blog.category', ['category' => $post->category->slug]) }}"
-                            class="inline-flex items-center bg-amber-100 text-amber-800 font-semibold px-2 py-1 rounded text-xs">
-                            <i class="fas fa-folder-open text-amber-500 mr-1"></i> {{ $post->category->name }}
+                            class="inline-flex items-center bg-amber-100 text-amber-700 font-semibold px-2 py-1 rounded text-xs">
+                            {{ $post->category->name }}
                         </a>
                     </div>
                     <span class="text-xs">
-                        <i class="fas fa-calendar-alt text-amber-500 mr-1"></i>{{ $post->created_at->diffForHumans() }}
+                        <i class="fas fa-clock text-amber-500 mr-1"></i>{{ ceil(str_word_count(strip_tags($post->body)) / 200) }} min de lectura
                     </span>
                 </div>
 
                 {{-- Título --}}
-                <h1 class="text-3xl font-bold text-amber-700 mb-4">{{ $post->title }}</h1>
+                <h1 class="text-3xl font-bold text-amber-600 mb-4">{{ $post->title }}</h1>
 
                 {{-- Extracto --}}
                 <p class="text-lg text-gray-600 mb-6">{{ $post->excerpt }}</p>
@@ -1343,12 +1342,11 @@
 
                 {{-- Tags --}}
                 @if ($post->tags->count())
-                    <div class="mt-8">
-                        <h3 class="text-sm font-semibold text-gray-700 mb-2">Etiquetas:</h3>
+                    <div class="mt-6">
                         <div class="flex flex-wrap gap-2">
                             @foreach ($post->tags as $tag)
                                 <a href="{{ route('blog.category', ['category' => $tag->slug]) }}"
-                                    class="text-xs bg-amber-100 text-amber-800 font-medium px-2 py-1 rounded">
+                                    class="text-xs bg-amber-100 text-amber-700 font-medium px-2 py-1 rounded">
                                     <i class="fas fa-tag text-amber-500 mr-1"></i>{{ $tag->name }}
                                 </a>
                             @endforeach
