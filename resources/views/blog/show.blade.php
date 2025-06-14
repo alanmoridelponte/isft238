@@ -1,12 +1,28 @@
 @extends('layouts.public.page')
 
+@section('header')
+    <link rel="canonical" href="{{ route('blog.show', ['category' => $post->category->slug, 'post' => $post->slug]) }}">
+    <meta name="robots" content="index,follow">
+    <meta name="keywords" content="{{ implode(', ', $post->tags->pluck('name')->toArray()) }}">
+    <meta name="description" content="{{ $post->excerpt }}">
+    <meta property="og:title" content="{{ $post->title }} - {{ $general_setting->institute_name }}">
+    <meta property="og:description" content="{{ $post->excerpt }}">
+    <meta property="og:image" content="{{ asset($post->banner) }}">
+    <meta property="og:url"
+        content="{{ route('blog.show', ['category' => $post->category->slug, 'post' => $post->slug]) }}">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $post->title }} - {{ $general_setting->institute_name }}">
+    <meta name="twitter:description" content="{{ $post->excerpt }}">
+    <meta name="twitter:image" content="{{ asset($post->banner) }}">
+@endsection
+
 @section('content')
     <div class="max-w-4xl aspect-video mx-auto px-4 py-12">
 
         {{-- Botón Volver --}}
         <div class="mb-6">
-            <a href="{{ route('blog.index') }}"
-                class="inline-flex items-center text-amber-600 text-sm font-medium">
+            <a href="{{ route('blog.index') }}" class="inline-flex items-center text-amber-600 text-sm font-medium">
                 <i class="fas fa-arrow-left mr-2"></i> Volver al blog
             </a>
         </div>
@@ -66,7 +82,9 @@
                         </a>
                     </div>
                     <span class="text-xs">
-                        <i class="fas fa-clock text-amber-500 mr-1"></i>{{ ceil(str_word_count(strip_tags($post->body)) / 200) }} min de lectura
+                        <i
+                            class="fas fa-clock text-amber-500 mr-1"></i>{{ ceil(str_word_count(strip_tags($post->body)) / 200) }}
+                        min de lectura
                     </span>
                 </div>
 
