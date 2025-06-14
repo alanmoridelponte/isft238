@@ -23,7 +23,14 @@ class CareerController extends Controller {
         return view('careers.index');
     }
 
-    public function show(Career $career) {
+    public function show($slug) {
+        $career = Career::where('slug', $slug)
+            ->first();
+
+        if (! $career) {
+            return redirect()->route('careers.index');
+        }
+
         return view('careers.show', compact('career'));
     }
 }

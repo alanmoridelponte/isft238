@@ -19,3 +19,7 @@ Route::prefix('blog')->name('blog.')->group(function () {
     Route::get('{category}', [BlogController::class, 'byCategory'])->name('category');
     Route::get('{category}/{post}', [BlogController::class, 'show'])->name('show');
 });
+
+Route::fallback(function () {
+    return redirect('/');
+});
