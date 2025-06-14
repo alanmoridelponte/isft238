@@ -42,7 +42,9 @@ class BlogController extends Controller {
         }
 
         $posts = Post::published()
-            ->with('tags')
+            ->whereHas('tags', function ($query) use ($slug) {
+                $query->where('slug', $slug);
+            })
             ->when(
                 $request->input('busqueda'),
                 fn($q, $search) => $q->where('title', 'like', "%{$search}%")
