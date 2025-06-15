@@ -1,5 +1,18 @@
 @extends('layouts.public.page')
 
+@section('header')
+    <link rel="canonical" href="{{ route('page.contact') }}">
+    <meta name="robots" content="index,follow">
+    <meta name="description" content="Contacto - {{ $general_setting->institute_motto }}">
+    <meta property="og:title" content="{{ $general_setting->institute_name }}">
+    <meta property="og:description" content="{{ $general_setting->institute_motto }}">
+    <meta property="og:url" content="{{ route('page.contact') }}">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $general_setting->institute_name }}">
+    <meta name="twitter:description" content="{{ $general_setting->institute_motto }}">
+@endsection
+
 @section('content')
 <section id="contacto" class="bg-gradient-to-b from-blue-50 to-neutral-50">
     <!-- Header -->
