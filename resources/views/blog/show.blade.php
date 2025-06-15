@@ -18,7 +18,7 @@
 @endsection
 
 @section('content')
-    <div class="max-w-4xl aspect-video mx-auto px-4 py-12">
+    <div class="max-h-full max-w-4xl aspect-video mx-auto px-4 py-12">
 
         {{-- Botón Volver --}}
         <div class="mb-6">
