@@ -1,5 +1,18 @@
 @extends('layouts.public.page')
 
+@section('header')
+    <link rel="canonical" href="{{ route('blog.index') }}">
+    <meta name="robots" content="index,follow">
+    <meta name="description" content="Noticias, experiencias y novedades del {{ $general_setting->institute_name }}">
+    <meta property="og:title" content="Blog Institucional - {{ $general_setting->institute_name }}">
+    <meta property="og:description" content="Noticias, experiencias y novedades del {{ $general_setting->institute_name }}">
+    <meta property="og:url" content="{{ route('blog.index') }}">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog Institucional - {{ $general_setting->institute_name }}">
+    <meta name="twitter:description" content="Noticias, experiencias y novedades del {{ $general_setting->institute_name }}">
+@endsection
+
 @section('content')
     <header class="bg-amber-500 text-white py-16">
         <div class="container mx-auto px-4 text-center">
@@ -63,7 +76,8 @@
                             <a href="{{ route('blog.tag', ['tag' => $tag->slug]) }}"
                                 class="text-sm px-4 py-1.5 rounded font-medium transition-all duration-200
                       {{ request('tag') === $tag->slug ? 'bg-amber-600 text-white shadow' : 'bg-amber-100 text-amber-600 hover:bg-amber-200' }}">
-                                <i class="fas fa-tags mr-2 {{ request('tag') === $tag->slug ? 'text-amber-100' : 'text-amber-600' }}"></i>{{ $tag->name }}
+                                <i
+                                    class="fas fa-tags mr-2 {{ request('tag') === $tag->slug ? 'text-amber-100' : 'text-amber-600' }}"></i>{{ $tag->name }}
                             </a>
                         @endforeach
                     </div>

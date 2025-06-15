@@ -1,4 +1,18 @@
 @extends('layouts.public.page')
+
+@section('header')
+    <link rel="canonical" href="{{ route('page.index') }}">
+    <meta name="robots" content="index,follow">
+    <meta name="description" content="{{ $general_setting->institute_motto }}">
+    <meta property="og:title" content="{{ $general_setting->institute_name }}">
+    <meta property="og:description" content="{{ $general_setting->institute_motto }}">
+    <meta property="og:url" content="{{ route('page.index') }}">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $general_setting->institute_name }}">
+    <meta name="twitter:description" content="{{ $general_setting->institute_motto }}">
+@endsection
+
 @section('content')
     <section class="relative h-[calc(100vh-96px)] md:h-[calc(100vh-100px)] w-full overflow-hidden">
         <!-- Video de fondo -->

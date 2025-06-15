@@ -1,5 +1,18 @@
 @extends('layouts.public.page')
 
+@section('header')
+    <link rel="canonical" href="{{ route('careers.show', ['career' => $career->slug ?? 'not-found']) }}">
+    <meta name="robots" content="index,follow">
+    <meta name="description" content="{{ $career->excerpt }}">
+    <meta property="og:title" content="{{ $career->title }} - {{ $general_setting->institute_name }}">
+    <meta property="og:description" content="{{ $career->excerpt }}">
+    <meta property="og:url" content="{{ route('careers.show', ['career' => $career->slug ?? 'not-found']) }}">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $career->title }} - {{ $general_setting->institute_name }}">
+    <meta name="twitter:description" content="{{ $career->excerpt }}">
+@endsection
+
 @section('content')
     <!-- Encabezado de la carrera -->
     <header class="bg-green-700 text-white py-16">
