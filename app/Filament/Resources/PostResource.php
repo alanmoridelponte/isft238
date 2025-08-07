@@ -76,7 +76,7 @@ class PostResource extends Resource {
                                     titleRuleUniqueParameters: [
                                         'ignorable'       => fn(?Post $record)       => $record,
                                         'modifyRuleUsing' => fn(Unique $rule) => $rule->whereNull('deleted_at'),
-                                        'column'          => 'name',
+                                        'column'          => 'title',
                                         'ignoreRecord'    => true,
                                     ],
                                     slugRuleUniqueParameters: [
