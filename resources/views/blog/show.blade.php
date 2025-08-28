@@ -67,7 +67,7 @@
 
         <article class="bg-white rounded-xl shadow overflow-hidden">
             {{-- Imagen arriba --}}
-            <img src="{{ asset($post->banner) }}" alt="Imagen de {{ $post->title }}"
+            <img src="{{ asset('storage/' . $post->banner) }}" alt="Imagen de {{ $post->title }}"
                 class="w-full aspect-video object-cover object-center bg-amber-600">
 
             <hr>

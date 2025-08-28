@@ -1,5 +1,5 @@
 <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300">
-    <img src="{{ asset($post->banner) }}" alt="Imagen de {{ $post->title }}"
+    <img src="{{ asset('storage/' . $post->banner) }}" alt="Imagen de {{ $post->title }}"
         class="w-full aspect-video object-cover object-center bg-amber-600">
         <hr>
     <div class="pt-3 px-4">
