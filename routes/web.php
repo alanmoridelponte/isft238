@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\MqttController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,10 @@ Route::prefix('blog')->name('blog.')->group(function () {
     Route::get('/etiquetas/{tag}', [BlogController::class, 'byTag'])->name('tag');
     Route::get('{category}', [BlogController::class, 'byCategory'])->name('category');
     Route::get('{category}/{post}', [BlogController::class, 'show'])->name('show');
+});
+
+Route::prefix('mqtt')->name('mqtt.')->group(function () {
+    Route::get('/test', [MqttController::class, 'test'])->name('test');
 });
 
 Route::fallback(function () {
