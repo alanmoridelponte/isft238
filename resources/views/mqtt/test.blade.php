@@ -23,7 +23,7 @@
         <!-- Conexión -->
         <div>
             <label class="block text-sm font-medium">Broker URL</label>
-            <input id="brokerUrl" type="text" value="mqtt://66.97.45.58:1883"
+            <input id="brokerUrl" type="text" value="mqtt://66.97.45.58:8083"
                 class="w-full p-2 border rounded mt-1" />
             <button onclick="connectMQTT()" class="mt-2 w-full bg-blue-500 text-white p-2 rounded">Conectar</button>
         </div>
@@ -54,24 +54,38 @@
     <script>
         let client;
 
+        function log(msg) {
+            const box = document.getElementById("messages");
+            const line = document.createElement("div");
+            line.textContent = msg;
+            box.appendChild(line);
+            box.scrollTop = box.scrollHeight;
+        }
+
         function connectMQTT() {
             const brokerUrl = document.getElementById("brokerUrl").value;
-            client = mqtt.connect(brokerUrl);
+            const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
 
-            client.on("connect", () => {
-                alert("Conectado al broker MQTT");
+            client = mqtt.connect(brokerUrl, {
+                clientId,
+                clean: true,
+                reconnectPeriod: 1000,
+                connectTimeout: 30 * 1000,
             });
 
-            client.on("message", (topic, message) => {
-                const msgBox = document.getElementById("messages");
-                const newMsg = document.createElement("div");
-                newMsg.textContent = `[${topic}] ${message}`;
-                msgBox.appendChild(newMsg);
-                msgBox.scrollTop = msgBox.scrollHeight;
+            client.on("connect", () => {
+                log("✅ Conectado al broker " + brokerUrl);
             });
 
             client.on("error", (err) => {
-                console.error("Error de conexión:", err);
+                log("❌ Error: " + err.message);
+            });
+
+            client.on("reconnect", () => log("Reconectando..."));
+            client.on("close", () => log("Conexión cerrada"));
+
+            client.on("message", (topic, payload) => {
+                log(`[${topic}] ${payload.toString()}`);
             });
         }
 
@@ -79,7 +93,8 @@
             const topic = document.getElementById("subTopic").value;
             if (client && topic) {
                 client.subscribe(topic, (err) => {
-                    if (!err) alert("Suscripto a " + topic);
+                    if (err) log("❌ Error al suscribirse: " + err.message);
+                    else log("📡 Suscripto a " + topic);
                 });
             }
         }
@@ -89,6 +104,7 @@
             const msg = document.getElementById("pubMessage").value;
             if (client && topic && msg) {
                 client.publish(topic, msg);
+                log("➡️ Enviado a " + topic + ": " + msg);
             }
         }
     </script>
