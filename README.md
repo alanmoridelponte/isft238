@@ -1,61 +1,215 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sitio y Blog de ISFT 238
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este repositorio contiene el código fuente del sitio institucional y blog del **Instituto Superior de Formación Técnica N° 238** (ISFT 238). El sitio está disponible en: https://isft238.edu.ar/
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Objetivo
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+El propósito de este proyecto es:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Proveer una página de inicio institucional que presente al instituto, sus carreras, noticias y contacto.
+- Mantener un blog o sección de novedades (revista digital) para publicar artículos, eventos e información relevante para la comunidad educativa.
+- Servir como plataforma centralizada, moderna y mantenible para el instituto.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Estructura del proyecto
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+A continuación un resumen de los directorios y archivos más relevantes:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+/
+├── app/                # Lógica de la aplicación (controladores, modelos, etc.)
+├── bootstrap/          # Archivos de arranque
+├── config/             # Configuración del proyecto
+├── database/           # Migraciones, seeds, estructura de la base de datos
+├── lang/               # Archivos de localización / traducción
+├── public/             # Archivos públicos: CSS, JS, imágenes, punto de entrada
+├── resources/           # Vistas, assets originales, plantillas
+├── routes/             # Definición de rutas (web, API, etc.)
+├── storage/            # Archivos generados, cache, logs
+├── tests/               # Pruebas automatizadas
+├── .env.example         # Ejemplo de archivo de variables de entorno
+├── composer.json        # Dependencias del backend (PHP / Laravel, u otro framework)
+├── package.json         # Dependencias del frontend / tooling JS
+├── vite.config.js       # Configuración de bundler / build frontend
+└── README.md            # Este archivo
+```
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠️ Tecnologías y dependencias
 
-### Premium Partners
+Este proyecto puede involucrar una o más de las siguientes tecnologías:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+- Backend: PHP con framework **Laravel** y *FilamentPHP*
+- Frontend: JavaScript, bundler Vite
+- Plantillas: Blade
+- Base de datos: MySQL
+- Librerías CSS/JS: Tailwind
 
-## Contributing
+> Ver archivos `composer.json` y `package.json` para los paquetes y versiones específicas.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Instalación y despliegue
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Estos son los pasos generales para instalar y ejecutar localmente:
 
-## Security Vulnerabilities
+1. Clonar el repositorio  
+   ```bash
+   git clone https://github.com/ISFT238/sitio-y-blog.git
+   cd sitio-y-blog
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. Configurar entorno  
+   - Copiar `.env.example` a `.env` y completar las variables (base de datos, credenciales, dominio, etc.)  
+   - Generar clave de aplicación (si aplica)  
+     ```bash
+     php artisan key:generate
+     ```
 
-## License
+3. Instalar dependencias  
+   ```bash
+   composer install
+   npm install
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. Migrar base de datos y (opcional) poblar datos de prueba  
+   ```bash
+   php artisan migrate
+   php artisan db:seed   # si hay seeds disponibles
+   ```
+
+5. Compilar assets  
+   ```bash
+   npm run dev        # modo desarrollo
+   npm run build      # producción
+   ```
+
+6. Iniciar servidor local  
+   ```bash
+   php artisan serve
+   ```
+
+   Luego acceder en el navegador a `http://localhost:8000` (o el puerto que corresponda).
+
+7. En producción: apuntar el dominio al directorio `public/`, configurar servidor web (Nginx, Apache), certificados SSL, permisos, etc.
+
+---
+
+## Configuración de Git y sincronización con el repositorio remoto
+
+Si estás configurando este proyecto por primera vez en tu entorno local, seguí estos pasos para vincular tu copia con el repositorio oficial, primero haz un fork de este repositiorio y luego configura tu git local:
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/TU-USUARIO/sitio-y-blog.git
+cd sitio-y-blog
+```
+
+### 2. Verificar el remoto actual
+
+```bash
+git remote -v
+```
+
+Deberías ver algo como:
+```
+origin  https://github.com/TU-USUARIO/sitio-y-blog.git (fetch)
+origin  https://github.com/TU-USUARIO/sitio-y-blog.git (push)
+```
+
+Si no aparece o querés cambiarlo, podés configurarlo así:
+
+```bash
+git remote remove origin
+git remote add origin https://github.com/TU-USUARIO/sitio-y-blog.git
+```
+
+### 3. Configurar el *upstream* (repositorio principal)
+
+Esto se usa si tu copia es un **fork** y querés mantenerla sincronizada con el repo original:
+
+```bash
+git remote add upstream https://github.com/ISFT238/sitio-y-blog.git
+```
+
+Podés verificarlo con:
+```bash
+git remote -v
+```
+
+### 4. Sincronizar tu rama local
+
+Para traer los últimos cambios del proyecto oficial:
+
+```bash
+git fetch upstream
+git checkout main
+git merge upstream/main
+```
+
+### 5. Subir tus cambios
+
+Una vez hechos tus commits:
+
+```bash
+git add .
+git commit -m "Descripción del cambio"
+git push origin main
+```
+
+Si es la primera vez que hacés push:
+
+```bash
+git push --set-upstream origin main
+```
+
+---
+
+**Tip:** Si colaborás frecuentemente, podés automatizar el *fetch* y *merge* con:
+```bash
+git pull upstream main
+```
+para mantener tu copia actualizada con el repositorio del ISFT 238.
+
+---
+
+## 🧩 Uso y contribución
+
+Si quieres aportar al proyecto:
+
+- Abre un **issue** para sugerir mejoras, reportar bugs o proponer nuevas funciones.
+- Realiza **fork** del repositorio y crea una rama de trabajo.
+- Envía **pull request** cuando tu cambio esté completo y probado.
+- Asegúrate de mantener la consistencia con las convenciones del proyecto (estilo de código, convenciones de nombres, etc.).
+
+---
+
+## 📫 Contacto
+
+Para dudas, sugerencias o soporte:
+
+- Correo del instituto: contacto@isft238.edu.ar  
+- Dirección: Calle Sáenz Peña 513, esquina Av. San Martín, Camet Norte  
+- Teléfono: (223) 438‑2392  
+
+---
+
+## 🏛️ Acerca de ISFT 238
+
+El ISFT 238 es un instituto de formación técnica con fuerte compromiso social, que ofrece **carreras con reconocimiento oficial** y orientadas a las necesidades del mercado laboral. ([isft238.edu.ar](https://isft238.edu.ar/))
+
+Entre sus carreras se encuentran:
+
+- Tecnicatura Superior en IoT y Sistemas Embebidos ([isft238.edu.ar](https://isft238.edu.ar/))  
+- Tecnicatura Superior en Turismo ([isft238.edu.ar](https://isft238.edu.ar/))  
+- Tecnicatura Superior en Interpretación y Traducción en Lengua de Señas Argentina / Español ([isft238.edu.ar](https://isft238.edu.ar/))  
+- Tecnicatura Superior en Enfermería ([isft238.edu.ar](https://isft238.edu.ar/))  
+- Tecnicatura Superior en Administración General ([isft238.edu.ar](https://isft238.edu.ar/))  
+- Tecnicatura Superior en Prácticas Deportivas ([isft238.edu.ar](https://isft238.edu.ar/))  
+
+La sección de noticias o “Revista Digital ISFT 238” se propone como espacio de difusión de saberes y experiencias institucionales. ([isft238.edu.ar](https://isft238.edu.ar/))
