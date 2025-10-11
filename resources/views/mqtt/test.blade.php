@@ -5,14 +5,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MQTT</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css ">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/mqtt/gauge-controller.js'])
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 </head>
 
@@ -49,7 +48,112 @@
             <h2 class="font-semibold text-gray-700">Mensajes recibidos:</h2>
             <div id="messages" class="h-40 overflow-y-auto border rounded p-2 bg-gray-50 text-sm"></div>
         </div>
+
+        <hr>
+
+        <div>
+            <div class="rounded-lg p-4 shadow-lg">
+                <div id="gauge-container-motor-velocity">Velocidad Motor</div>
+                <div class="pt-12">
+                    <input class="w-full accent-blue-600" type="range" id="gauge-motor-velocity" value="0"
+                        min="0" max="100" />
+                    <div class="mt-4 flex w-full justify-between">
+                        <span class="text-lg text-gray-600">0</span>
+                        <span class="text-lg text-gray-600">100</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="rounded-lg p-4 shadow-lg">
+            <div id="gauge-container-light-dimmer">Intensidad Luz</div>
+            <div class="pt-12">
+                <input class="w-full accent-blue-600" type="range" id="gauge-light-dimmer" value="0"
+                    min="0" max="100" />
+                <div class="mt-4 flex w-full justify-between">
+                    <span class="text-lg text-gray-600">0</span>
+                    <span class="text-lg text-gray-600">100</span>
+                </div>
+            </div>
+        </div>
+
+
     </div>
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Crear el gauge
+            window.gaugeMotorVelocity = new GaugeController('gauge-container-motor-velocity', {
+                initialPercentage: 0,
+                text: 'Velocidad Motor',
+                gaugeColor: "#3b82f6",
+                gaugeBgColor: "#dbeafe",
+                borderColor: "#475569",
+                centerColor: "#f1f5f9",
+                outerRings: [{
+                        color: "#5cd65c",
+                        percent: 0
+                    }, {
+                        color: "#5cd65c",
+                        percent: 15
+                    },
+                    {
+                        color: "#ffc800",
+                        percent: 65
+                    },
+                    {
+                        color: "#ea5353",
+                        percent: 85
+                    }
+                ]
+            });
+
+            window.gaugeLightDimmer = new GaugeController('gauge-container-light-dimmer', {
+                initialPercentage: 0,
+                text: 'Intensidad Luz',
+                gaugeColor: "#3b82f6",
+                gaugeBgColor: "#dbeafe",
+                borderColor: "#475569",
+                centerColor: "#f1f5f9",
+                outerRings: [{
+                        color: "#3c2ac6",
+                        percent: 0
+                    },
+                    {
+                        color: "#717fea",
+                        percent: 20
+                    },
+                    {
+                        color: "#aab4fd",
+                        percent: 40
+                    },
+                    {
+                        color: "#e4e0ff",
+                        percent: 60
+                    },
+                    {
+                        color: "#f5f5f5",
+                        percent: 80
+                    }
+                ]
+            });
+
+            document
+                .getElementById('gauge-motor-velocity')
+                .addEventListener('input', Helpers.debounce((e) => {
+                    const value = parseInt(e.target.value);
+                    if (client && !isNaN(value)) {
+                        client.publish('lola', value.toString());
+                    }
+                }, 100));
+        });
+    </script>
+
 
     <script>
         let client;
@@ -87,6 +191,22 @@
             client.on("message", (topic, payload) => {
                 log(`[${topic}] ${payload.toString()}`);
             });
+
+            client.on("message", Helpers.ifTopic("lola", (payload) => {
+                const dimmer = parseFloat(payload.toString());
+                if (!isNaN(dimmer)) {
+                    const percentage = Helpers.percentInRange(dimmer, 0, 100);
+                    window.gaugeMotorVelocity.setPercentage(percentage);
+                }
+            }));
+
+            client.on("message", Helpers.ifTopic("home/light/dimmer", (payload) => {
+                const dimmer = parseFloat(payload.toString());
+                if (!isNaN(dimmer)) {
+                    const percentage = Helpers.percentInRange(dimmer, 0, 100);
+                    window.gaugeLightDimmer.setPercentage(percentage);
+                }
+            }));
         }
 
         function subscribeTopic() {
