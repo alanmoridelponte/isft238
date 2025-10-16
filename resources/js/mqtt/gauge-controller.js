@@ -31,8 +31,8 @@ class GaugeController {
               <div class="gauge-bg" style="position: absolute; aspect-ratio: 1 / 1; top: 0; width: 100%; background: ${this.gaugeColor}; z-index: 10;"></div>
               <div class="gauge-fill" style="position: absolute;bottom: 0px;left: 0px;width: 100%;height: 100%;background: ${this.gaugeBgColor};transform-origin: center bottom;transition: transform 0.5s; z-index: 11;"></div>
               <div class="center-circle" style="position: absolute; top: 15%; display: flex; aspect-ratio: 1 / 1; width: 85%; justify-content: center; border-radius: 9999px; background: ${this.centerColor}; z-index: 12;"></div>
-              <div class="gauge-value text-gray-700" style="position: absolute; bottom: 25%; width: 100%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; text-align: center; font-size: 3.5rem; font-weight: bold; z-index: 12;">0%</div>
-              <div class="gauge-text text-gray-700" style="position: absolute; bottom: 5%; width: 100%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; text-align: center; font-size: 2rem; font-weight: bold; z-index: 12;">${this.gaugeText}</div>
+              <div class="gauge-value text-gray-700" style="position: absolute; bottom: 25%; width: 100%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; text-align: center; font-size: 2.5rem; font-weight: bold; z-index: 12;">0%</div>
+              <div class="gauge-text text-gray-700" style="position: absolute; bottom: 5%; width: 100%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; text-align: center; font-size: 1rem; font-weight: bold; z-index: 12;">${this.gaugeText}</div>
             </div>
           </div>
         `;
@@ -147,29 +147,3 @@ class GaugeController {
 }
 
 window.GaugeController = GaugeController;
-
-class Helpers {
-    static ifTopic(expectedTopic, callback) {
-        return (topic, payload) => {
-            if (topic === expectedTopic) {
-                callback(payload);
-            }
-        };
-    }
-
-    static percentInRange(percentage, min, max) {
-        return Math.min(Math.max((percentage / max) * max, min), max);
-    }
-
-    static debounce(callback, wait) {
-        let timeoutId = null;
-        return (...args) => {
-            window.clearTimeout(timeoutId);
-            timeoutId = window.setTimeout(() => {
-                callback(...args);
-            }, wait);
-        };
-    }
-}
-
-window.Helpers = Helpers;

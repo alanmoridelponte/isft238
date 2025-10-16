@@ -11,11 +11,13 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/mqtt/gauge-controller.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/mqtt/helpers.js', 'resources/js/mqtt/gauge-controller.js', 'resources/js/mqtt/toggle-controller.js'])
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
 
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<body class="bg-gray-100 min-h-screen flex flex-col gap-5 items-center justify-center">
+
     <div class="w-full max-w-md bg-white shadow-lg rounded-lg p-6 space-y-4">
         <h1 class="text-2xl font-bold text-center text-blue-600">MQTT Dashboard</h1>
 
@@ -49,10 +51,22 @@
             <div id="messages" class="h-40 overflow-y-auto border rounded p-2 bg-gray-50 text-sm"></div>
         </div>
 
-        <hr>
+    </div>
 
-        <div>
-            <div class="rounded-lg p-4 shadow-lg">
+    <div class="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6 space-y-4">
+        <h1 class="text-2xl font-bold text-center text-blue-600">Controles</h1>
+
+        <div class="flex flex-col  w-full justify-center gap-12">
+            <div id="valve-toggle-container" class="flex flex-1/4 justify-around items-center"></div>
+            <div id="pump-toggle-container" class="flex flex-1/4 justify-around items-center"></div>
+            <div id="light-toggle-container" class="flex justify-around items-center"></div>
+            <div id="motor-toggle-container" class="flex justify-around items-center"></div>
+        </div>
+
+        <hr class="my-12" />
+
+        <div class="flex flex-col md:flex-row gap-6 w-full justify-around">
+            <div class="w-full">
                 <div id="gauge-container-motor-velocity">Velocidad Motor</div>
                 <div class="pt-12">
                     <input class="w-full accent-blue-600" type="range" id="gauge-motor-velocity" value="0"
@@ -63,23 +77,19 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
-
-        <div class="rounded-lg p-4 shadow-lg">
-            <div id="gauge-container-light-dimmer">Intensidad Luz</div>
-            <div class="pt-12">
-                <input class="w-full accent-blue-600" type="range" id="gauge-light-dimmer" value="0"
-                    min="0" max="100" />
-                <div class="mt-4 flex w-full justify-between">
-                    <span class="text-lg text-gray-600">0</span>
-                    <span class="text-lg text-gray-600">100</span>
+            <div class="w-full">
+                <div id="gauge-container-light-dimmer">Intensidad Luz</div>
+                <div class="pt-12">
+                    <input class="w-full accent-blue-600" type="range" id="gauge-light-dimmer" value="0"
+                        min="0" max="100" />
+                    <div class="mt-4 flex w-full justify-between">
+                        <span class="text-lg text-gray-600">0</span>
+                        <span class="text-lg text-gray-600">100</span>
+                    </div>
                 </div>
             </div>
         </div>
-
-
     </div>
 
 
@@ -87,6 +97,31 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            window.toggleValve = new ToggleController('valve-toggle-container', {
+                text: 'Válvula',
+                initialState: false,
+                onChange: Helpers.debounce(state => client?.publish('electrovalvula', state ? 'ON' : 'OFF'),
+                    100)
+            });
+
+            window.togglePump = new ToggleController('pump-toggle-container', {
+                text: 'Bomba',
+                initialState: false,
+                onChange: Helpers.debounce(state => client?.publish('bomba', state ? 'ON' : 'OFF'), 100)
+            });
+
+            window.toggleLight = new ToggleController('light-toggle-container', {
+                text: 'Luz&nbsp;&nbsp;&nbsp;&nbsp;',
+                initialState: false,
+                onChange: Helpers.debounce(state => client?.publish('luz', state ? 'ON' : 'OFF'), 100)
+            });
+
+            window.toggleMotor = new ToggleController('motor-toggle-container', {
+                text: 'Motor',
+                initialState: false,
+                onChange: Helpers.debounce(state => client?.publish('motorMQTT', state ? 'ON' : 'OFF'), 100)
+            });
+
             // Crear el gauge
             window.gaugeMotorVelocity = new GaugeController('gauge-container-motor-velocity', {
                 initialPercentage: 0,
@@ -121,11 +156,11 @@
                 borderColor: "#475569",
                 centerColor: "#f1f5f9",
                 outerRings: [{
-                        color: "#3c2ac6",
+                        color: "#f5f5f5",
                         percent: 0
                     },
                     {
-                        color: "#717fea",
+                        color: "#e4e0ff",
                         percent: 20
                     },
                     {
@@ -133,11 +168,11 @@
                         percent: 40
                     },
                     {
-                        color: "#e4e0ff",
+                        color: "#717fea",
                         percent: 60
                     },
                     {
-                        color: "#f5f5f5",
+                        color: "#3c2ac6",
                         percent: 80
                     }
                 ]
@@ -148,7 +183,16 @@
                 .addEventListener('input', Helpers.debounce((e) => {
                     const value = parseInt(e.target.value);
                     if (client && !isNaN(value)) {
-                        client.publish('lola', value.toString());
+                        client.publish('velocidad', value.toString());
+                    }
+                }, 100));
+
+            document
+                .getElementById('gauge-light-dimmer')
+                .addEventListener('input', Helpers.debounce((e) => {
+                    const value = parseInt(e.target.value);
+                    if (client && !isNaN(value)) {
+                        client.publish('iluminacion', value.toString());
                     }
                 }, 100));
         });
@@ -156,7 +200,7 @@
 
 
     <script>
-        let client;
+        var client;
 
         function log(msg) {
             const box = document.getElementById("messages");
@@ -192,20 +236,36 @@
                 log(`[${topic}] ${payload.toString()}`);
             });
 
-            client.on("message", Helpers.ifTopic("lola", (payload) => {
-                const dimmer = parseFloat(payload.toString());
-                if (!isNaN(dimmer)) {
-                    const percentage = Helpers.percentInRange(dimmer, 0, 100);
+            client.on("message", Helpers.ifTopic("velocidad", (payload) => {
+                const velocity = parseFloat(payload.toString());
+                if (!isNaN(velocity)) {
+                    const percentage = Helpers.percentInRange(velocity, 0, 100);
                     window.gaugeMotorVelocity.setPercentage(percentage);
                 }
             }));
 
-            client.on("message", Helpers.ifTopic("home/light/dimmer", (payload) => {
+            client.on("message", Helpers.ifTopic("iluminacion", (payload) => {
                 const dimmer = parseFloat(payload.toString());
                 if (!isNaN(dimmer)) {
                     const percentage = Helpers.percentInRange(dimmer, 0, 100);
                     window.gaugeLightDimmer.setPercentage(percentage);
                 }
+            }));
+
+            client.on("message", Helpers.ifTopic("electrovalvula", (payload) => {
+                window.toggleValve.value = payload.toString().toUpperCase() === "ON";
+            }));
+
+            client.on("message", Helpers.ifTopic("bomba", (payload) => {
+                window.togglePump.value = payload.toString().toUpperCase() === "ON";
+            }));
+
+            client.on("message", Helpers.ifTopic("luz", (payload) => {
+                window.toggleLight.value = payload.toString().toUpperCase() === "ON";
+            }));
+
+            client.on("message", Helpers.ifTopic("motorMQTT", (payload) => {
+                window.toggleMotor.value = payload.toString().toUpperCase() === "ON";
             }));
         }
 
