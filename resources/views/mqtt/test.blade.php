@@ -78,10 +78,12 @@
                 </div>
             </div>
 
+            <hr class="md:hidden my-6" />
+
             <div class="w-full">
                 <div id="gauge-container-light-dimmer">Intensidad Luz</div>
                 <div class="pt-12">
-                    <input class="w-full accent-blue-600" type="range" id="gauge-light-dimmer" value="0"
+                    <input class="w-full accent-indigo-600" type="range" id="gauge-light-dimmer" value="0"
                         min="0" max="100" />
                     <div class="mt-4 flex w-full justify-between">
                         <span class="text-lg text-gray-600">0</span>
@@ -89,6 +91,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <hr class="my-12" />
+
+        <div class="flex flex-col gap-6 w-full justify-center items-center">
+            <h5 class="font-bold text-gray-700">Selector de Color Luz</h5>
+            <div id="gauge-light-picker"></div>
         </div>
     </div>
 
@@ -195,6 +204,11 @@
                         client.publish('iluminacion', value.toString());
                     }
                 }, 100));
+
+            window.gaugeLightColorPicker = new iro.ColorPicker("#gauge-light-picker", {
+                width: 320,
+                color: "#f00"
+            });
         });
     </script>
 
@@ -223,6 +237,30 @@
 
             client.on("connect", () => {
                 log("✅ Conectado al broker " + brokerUrl);
+                client.subscribe("velocidad", (err) => {
+                    if (err) log("❌ Error al suscribirse: " + err.message);
+                    else log("📡 Suscripto a topic velocidad");
+                });
+                client.subscribe("iluminacion", (err) => {
+                    if (err) log("❌ Error al suscribirse: " + err.message);
+                    else log("📡 Suscripto a topic iluminacion");
+                });
+                client.subscribe("electrovalvula", (err) => {
+                    if (err) log("❌ Error al suscribirse: " + err.message);
+                    else log("📡 Suscripto a topic electrovalvula");
+                });
+                client.subscribe("bomba", (err) => {
+                    if (err) log("❌ Error al suscribirse: " + err.message);
+                    else log("📡 Suscripto a topic bomba");
+                });
+                client.subscribe("luz", (err) => {
+                    if (err) log("❌ Error al suscribirse: " + err.message);
+                    else log("📡 Suscripto a topic luz");
+                });
+                client.subscribe("motorMQTT", (err) => {
+                    if (err) log("❌ Error al suscribirse: " + err.message);
+                    else log("📡 Suscripto a topic motorMQTT");
+                });
             });
 
             client.on("error", (err) => {
@@ -241,6 +279,7 @@
                 if (!isNaN(velocity)) {
                     const percentage = Helpers.percentInRange(velocity, 0, 100);
                     window.gaugeMotorVelocity.setPercentage(percentage);
+                    document.getElementById('gauge-motor-velocity').value = percentage;
                 }
             }));
 
@@ -249,6 +288,7 @@
                 if (!isNaN(dimmer)) {
                     const percentage = Helpers.percentInRange(dimmer, 0, 100);
                     window.gaugeLightDimmer.setPercentage(percentage);
+                    document.getElementById('gauge-light-dimmer').value = percentage;
                 }
             }));
 
