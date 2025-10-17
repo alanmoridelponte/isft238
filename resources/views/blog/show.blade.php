@@ -7,14 +7,14 @@
     <meta name="description" content="{{ $post->excerpt }}">
     <meta property="og:title" content="{{ $post->title }} - {{ $general_setting->institute_name }}">
     <meta property="og:description" content="{{ $post->excerpt }}">
-    <meta property="og:image" content="{{ asset($post->banner) }}">
+    <meta property="og:image" content="{{ asset('storage/' . $post->banner) }}">
     <meta property="og:url"
         content="{{ route('blog.show', ['category' => $post->category->slug, 'post' => $post->slug]) }}">
     <meta property="og:type" content="article">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $post->title }} - {{ $general_setting->institute_name }}">
     <meta name="twitter:description" content="{{ $post->excerpt }}">
-    <meta name="twitter:image" content="{{ asset($post->banner) }}">
+    <meta name="twitter:image" content="{{ asset('storage/' . $post->banner) }}">
 @endsection
 
 @section('content')
