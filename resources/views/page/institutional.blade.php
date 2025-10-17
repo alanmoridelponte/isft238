@@ -24,10 +24,10 @@
                     </picture>
                 </div>
             </section>
-            <section class="bg-gradient-to-r from-white via-green-50 to-amber-50  py-12 md:py-24 pl-8 pr-6">
+            <section class="bg-linear-to-r from-white via-green-50 to-amber-50  py-12 md:py-24 pl-8 pr-6">
                 <div class="max-w-4xl mx-auto text-left">
                     <h1
-                        class="text-5xl md:text-6xl lg:text-8xl font-bold bg-gradient-to-r from-blue-800 via-emerald-600 via-55% to-yellow-500 to-75% bg-clip-text text-transparent">
+                        class="text-5xl md:text-6xl lg:text-8xl font-bold bg-linear-to-r from-blue-800 via-emerald-600 via-55% to-yellow-500 to-75% bg-clip-text text-transparent">
                         {{ $general_setting->institute_initialism }}</h1>
                     <h2 class="text-2xl lg:text-4xl font-bold text-blue-900 mb-4">@breakResponsive($general_setting->institute_name)</h2>
                 </div>

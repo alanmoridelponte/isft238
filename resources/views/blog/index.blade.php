@@ -20,7 +20,7 @@
             <p class="mt-2 text-lg">Noticias, experiencias y novedades del {{ $general_setting->institute_name }}</p>
         </div>
     </header>
-    <section class="bg-gradient-to-b from-amber-50 to-neutral-50 py-12 px-4">
+    <section class="bg-linear-to-b from-amber-50 to-neutral-50 py-12 px-4">
         <div class="container mx-auto ">
             <!-- Filtros principales -->
             <div class="bg-white border border-amber-100 shadow rounded-lg p-4 mb-4">

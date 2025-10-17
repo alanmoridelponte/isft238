@@ -14,7 +14,7 @@
 @endsection
 
 @section('content')
-<section id="contacto" class="bg-gradient-to-b from-blue-50 to-neutral-50">
+<section id="contacto" class="bg-linear-to-b from-blue-50 to-neutral-50">
     <!-- Header -->
     <header class="bg-blue-700 text-white py-20">
         <div class="container mx-auto px-4 text-center">

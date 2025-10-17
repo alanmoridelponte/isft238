@@ -2,7 +2,7 @@
   <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
     <div class="flex flex-col items-top">
         <a href="{{ route('page.index') }}" class="flex items-top">
-            <span class="text-2xl font-bold bg-gradient-to-r from-sky-500 via-emerald-500 via-55% to-yellow-500 to-95% bg-clip-text text-transparent">{{ $general_setting->institute_initialism }}</span>
+            <span class="text-2xl font-bold bg-linear-to-r from-sky-500 via-emerald-500 via-55% to-yellow-500 to-95% bg-clip-text text-transparent">{{ $general_setting->institute_initialism }}</span>
         </a>
         <span class="text-md font-bold text-white-400 mt-1 mb-2">{{ $general_setting->institute_name }}</span>
         <span class="text-sm font-semibold text-white-400 mb-2">{{ $general_setting->institute_motto }}</span>

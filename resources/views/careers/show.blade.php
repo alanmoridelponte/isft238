@@ -30,22 +30,22 @@
 
                     <div class="bg-green-50 p-4 rounded-xl shadow-sm hover:shadow-md transition sm:col-span-2">
                         <div class="flex items-center md:items-top justify-between gap-4 mb-4 md:mb-0">
-                            <div class="flex items-center justify-center w-12 lg:w-16 h-12 lg:h-16 rounded-md bg-gradient-to-br from-green-700 to-green-800">
+                            <div class="flex items-center justify-center w-12 lg:w-16 h-12 lg:h-16 rounded-md bg-linear-to-br from-green-700 to-green-800">
                                 <i class="fas fa-graduation-cap text-2xl lg:text-3xl text-white"></i>
                             </div>
-                            <h3 class="text-2xl lg:text-3xl flex-1 font-bold bg-gradient-to-br from-green-700 to-green-800 bg-clip-text text-transparent tracking-tight">
+                            <h3 class="text-2xl lg:text-3xl flex-1 font-bold bg-linear-to-br from-green-700 to-green-800 bg-clip-text text-transparent tracking-tight">
                                 Título de Grado<div class="hidden md:flex"><br><span class="text-xl font-semibold">{{ $career->resolution }}</span></div>
                             </h3>
                         </div>
-                        <span class="md:hidden text-xl font-semibold bg-gradient-to-br from-green-700 to-green-800 bg-clip-text text-transparent tracking-tight">{{ $career->resolution }}</span>
+                        <span class="md:hidden text-xl font-semibold bg-linear-to-br from-green-700 to-green-800 bg-clip-text text-transparent tracking-tight">{{ $career->resolution }}</span>
                     </div>
 
                     <div class="bg-amber-50 p-4 rounded-xl shadow-sm hover:shadow-md transition">
                         <div class="flex items-center md:items-top justify-between gap-2 leading-none">
-                            <div class="flex items-center justify-center w-10 lg:w-12 h-10 lg:h-12 rounded-md bg-gradient-to-br from-amber-700 to-amber-800">
+                            <div class="flex items-center justify-center w-10 lg:w-12 h-10 lg:h-12 rounded-md bg-linear-to-br from-amber-700 to-amber-800">
                                 <i class="far fa-clock text-xl lg:text-2xl text-white font-bold"></i>
                             </div>
-                            <h3 class="flex flex-col flex-1 bg-gradient-to-br from-amber-700 to-amber-800 bg-clip-text text-transparent tracking-tight">
+                            <h3 class="flex flex-col flex-1 bg-linear-to-br from-amber-700 to-amber-800 bg-clip-text text-transparent tracking-tight">
                                 <span class="text-xl lg:text-2xl font-bold">Duración</span>
                                 <span class="text-md lg:text-lg font-semibold">{{ $career->duration }}</span>
                             </h3>
@@ -54,10 +54,10 @@
 
                     <div class="bg-amber-50 p-4 rounded-xl shadow-sm hover:shadow-md transition">
                         <div class="flex items-center md:items-top justify-between gap-2 leading-none">
-                            <div class="flex items-center justify-center w-10 lg:w-12 h-10 lg:h-12 rounded-md bg-gradient-to-br from-amber-700 to-amber-800">
+                            <div class="flex items-center justify-center w-10 lg:w-12 h-10 lg:h-12 rounded-md bg-linear-to-br from-amber-700 to-amber-800">
                                 <i class="fas fa-chalkboard-teacher text-xl lg:text-2xl text-white font-bold"></i>
                             </div>
-                            <h3 class="flex flex-col flex-1 bg-gradient-to-br from-amber-700 to-amber-800 bg-clip-text text-transparent tracking-tight">
+                            <h3 class="flex flex-col flex-1 bg-linear-to-br from-amber-700 to-amber-800 bg-clip-text text-transparent tracking-tight">
                                 <span class="text-xl lg:text-2xl font-bold">Modalidad</span>
                                 <span class="text-md lg:text-lg font-semibold">{{ $career->modality }}</span>
                             </h3>

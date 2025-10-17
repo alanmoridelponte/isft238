@@ -1,8 +1,8 @@
-<div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300">
+<div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300 h-full flex flex-col">
     <img src="{{ asset('storage/' . $post->banner) }}" alt="Imagen de {{ $post->title }}"
         class="w-full aspect-video object-cover object-center bg-amber-600">
         <hr>
-    <div class="pt-3 px-4">
+    <div class="pt-3 px-4 flex-grow">
         <div class="flex items-center gap-2 mb-2 justify-between">
             <a href="{{ route('blog.category', ['category' => $post->category->slug]) }}"
                 class="text-xs bg-amber-100 text-amber-600 font-semibold px-2 py-1 rounded">
@@ -11,7 +11,7 @@
         </div>
         <a href="{{ route('blog.show', ['category' => $post->category->slug, 'post' => $post->slug]) }}">
             <h2 class="text-xl font-bold text-amber-600 mb-2">{{ $post->title }}</h2>
-            <p class="text-gray-700 text-sm mb-2">{{ $post->excerpt }}</p>
+            <p class="text-gray-700 text-sm mb-2 flex-grow">{{ $post->excerpt }}</p>
             <span class="text-amber-600 font-semibold no-underline">
                 Leer más <i class="fas fa-long-arrow-alt-right"></i>
             </span>
