@@ -107,7 +107,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             window.toggleValve = new ToggleController('valve-toggle-container', {
-                text: 'Válvula',
+                text: 'Agua',
                 initialState: false,
                 onChange: Helpers.debounce(state => client?.publish('electrovalvula', state ? 'ON' : 'OFF'),
                     100)
@@ -209,6 +209,12 @@
                 width: 320,
                 color: "#f00"
             });
+
+            window.gaugeLightColorPicker.on('color:change', Helpers.debounce(function(color) {
+                if (client) {
+                    client.publish('rgb', color.rgbString);
+                }
+            }, 100));
         });
     </script>
 
@@ -261,6 +267,10 @@
                     if (err) log("❌ Error al suscribirse: " + err.message);
                     else log("📡 Suscripto a topic motorMQTT");
                 });
+                client.subscribe("rgb", (err) => {
+                    if (err) log("❌ Error al suscribirse: " + err.message);
+                    else log("📡 Suscripto a topic rgb");
+                });
             });
 
             client.on("error", (err) => {
@@ -306,6 +316,10 @@
 
             client.on("message", Helpers.ifTopic("motorMQTT", (payload) => {
                 window.toggleMotor.value = payload.toString().toUpperCase() === "ON";
+            }));
+
+            client.on("message", Helpers.ifTopic("rgb", (payload) => {
+                window.gaugeLightColorPicker.rgbString = payload.toString();
             }));
         }
 
